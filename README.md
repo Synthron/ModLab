@@ -18,7 +18,7 @@ But now It will be bigger, better and way too complicated.
 ## Repo
 
 - [X] Rewrite documentation in english
-- [ ] Cleanup Repo
+- [X] Cleanup Repo
 
 ---
 
@@ -90,7 +90,7 @@ But now It will be bigger, better and way too complicated.
 - SymPSU
   - [X] PWM Signals
   - [X] ADC
-  - [ ] CAN-Interface
+  - [X] CAN-Interface
 - Power SMPS
   - [ ] PWM Signals
   - [ ] ADC
