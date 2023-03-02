@@ -1,0 +1,32 @@
+\chapter{ModLab}
+Okay. As I already said, I didn't like the idea of a completely discrete system. During my second year of training (it was 3 years total) I was already done with all the FMAS modules and my instructors didn't really know what to do with me. So I proposed to develop my own system and thus the ``Arduino Workstation'' was born. I made a LOT of bad design choices back then which resulted in it being labeled a proof of concept. After that I wanted to make a better one with the though of ``overengineered and thought out as much as possible'' in mind. Obviously I don't plan \textit{everything} in advance for years and then build everything at once in the end, but I definitely put more thought into designing it and keeping it as modular as possible. Also I try to avoid bottlenecks and major design errors by thinking not only about the module itself, but the I always have the whole system in mind. 
+
+And because of this, I decided to make it bigger. Not only in dimensions, but also in effort. The ModLab is my long-term project which will grow and improve over time with no fixed deadlines and goals. 
+
+And that is how this project came to be.
+
+\section{Lessons Learned from the Arduino Workstation}
+\subsection{No virtual Grounds!}
+A huge error was my thought, that +12V and -12V can be used as 24V. With some effort this surely is possible, but it includes a whole lot of difficulties and things to consider. 
+
+So why bothering with that? Just use a fixed 24V rail on the backplane and boom, done.
+
+\subsection{No hand-wired backplanes!}
+I don't think I have to talk a lot about that\dots
+
+The backplane of the Arduino Workstation was handwired with all 32 pins across several connectors. Suffice to say that I had some connection issues and it was a work I don't want to do again. Making a PCB is definitely easier and well designed way more modular. 
+
+\subsection{Planning, Planning, Planning}
+The old system was just made up as I went. Nothing was considered, I just wanted to play around. 
+
+Now everything is planned through, difficult circuits are simulated first and every design will get a review. This will help avoiding major errors and hopefully ensures the success.
+
+\section{What will be different?}
+First of all, the planning. This part will be a more elaborate and thorough, which is why this project will take some time. 
+Also I want to digitalize a lot more. In the Arduino Workstation, I still used potentiometers and buttons as interfaces and regulators, so a lot of hands on manipulation. This will be changed with digi-pots as well as DACs or PWM. 
+
+Also I went away form Arduino. Actually I scrapped AVRs as a whole. Most things will use a more powerful STM32 controller to help with timing and speed. 
+
+\vspace{1cm}
+
+Nonetheless maybe some AVRs or PIC microcontrollers will find there way into the system. Not for things that need a lot of processing power, but nostalgia can go a long way and if they fit the function, why not.

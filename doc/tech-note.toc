@@ -1,0 +1,80 @@
+\babel@toc {nil}{}
+\contentsline {chapter}{\numberline {I}List of Tables}{II}{chapter.2}%
+\contentsline {chapter}{\numberline {II}List of Figures}{III}{chapter.3}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.4}%
+\contentsline {chapter}{\numberline {2}The Rack}{2}{chapter.5}%
+\contentsline {section}{\numberline {2.1}The Idea}{2}{section.6}%
+\contentsline {section}{\numberline {2.2}Planning it out}{2}{section.7}%
+\contentsline {section}{\numberline {2.3}Construction}{3}{section.9}%
+\contentsline {chapter}{\numberline {3}FMAS}{5}{chapter.10}%
+\contentsline {section}{\numberline {3.1}Background}{5}{section.11}%
+\contentsline {section}{\numberline {3.2}The System}{5}{section.12}%
+\contentsline {section}{\numberline {3.3}Modules}{6}{section.13}%
+\contentsline {chapter}{\numberline {4}ModLab}{7}{chapter.14}%
+\contentsline {section}{\numberline {4.1}Lessons Learned from the Arduino Workstation}{7}{section.15}%
+\contentsline {subsection}{\numberline {4.1.1}No virtual Grounds!}{7}{subsection.16}%
+\contentsline {subsection}{\numberline {4.1.2}No hand-wired backplanes!}{7}{subsection.17}%
+\contentsline {subsection}{\numberline {4.1.3}Planning, Planning, Planning}{7}{subsection.18}%
+\contentsline {section}{\numberline {4.2}What will be different?}{8}{section.19}%
+\contentsline {chapter}{\numberline {5}The Bus}{9}{chapter.20}%
+\contentsline {section}{\numberline {5.1}Voltages}{9}{section.21}%
+\contentsline {subsection}{\numberline {5.1.1}5V}{9}{subsection.22}%
+\contentsline {subsection}{\numberline {5.1.2}24V}{9}{subsection.23}%
+\contentsline {subsection}{\numberline {5.1.3}Symmetric 30V (-15V..+15V)}{9}{subsection.24}%
+\contentsline {section}{\numberline {5.2}Interfaces}{9}{section.25}%
+\contentsline {subsection}{\numberline {5.2.1}I2C}{10}{subsection.26}%
+\contentsline {subsection}{\numberline {5.2.2}RS485}{10}{subsection.27}%
+\contentsline {subsection}{\numberline {5.2.3}SPI}{10}{subsection.28}%
+\contentsline {subsection}{\numberline {5.2.4}CAN}{10}{subsection.29}%
+\contentsline {section}{\numberline {5.3}I/Os}{10}{section.30}%
+\contentsline {subsection}{\numberline {5.3.1}Digital}{10}{subsection.31}%
+\contentsline {subsection}{\numberline {5.3.2}DACs}{11}{subsection.32}%
+\contentsline {section}{\numberline {5.4}Layout}{11}{section.33}%
+\contentsline {chapter}{\numberline {6}ModLab Modules}{13}{chapter.35}%
+\contentsline {section}{\numberline {6.1}Bus Adapter}{14}{section.36}%
+\contentsline {section}{\numberline {6.2}Host Bus Controller}{14}{section.37}%
+\contentsline {subsection}{\numberline {6.2.1}CPU}{15}{subsection.39}%
+\contentsline {subsection}{\numberline {6.2.2}Additional Hardware}{15}{subsection.40}%
+\contentsline {section}{\numberline {6.3}Diode Tester}{16}{section.41}%
+\contentsline {subsection}{\numberline {6.3.1}Parameters}{17}{subsection.43}%
+\contentsline {subsection}{\numberline {6.3.2}Operation Modes}{17}{subsection.45}%
+\contentsline {subsection}{\numberline {6.3.3}Channels/Outputs}{17}{subsection.47}%
+\contentsline {section}{\numberline {6.4}Waveform Generator DDS}{18}{section.48}%
+\contentsline {subsection}{\numberline {6.4.1}Parameters}{18}{subsection.49}%
+\contentsline {subsection}{\numberline {6.4.2}Operation Modes}{18}{subsection.50}%
+\contentsline {subsection}{\numberline {6.4.3}Channels/Outputs}{18}{subsection.51}%
+\contentsline {section}{\numberline {6.5}Symmetric Linear Power Supply (SymPSU)}{18}{section.52}%
+\contentsline {subsection}{\numberline {6.5.1}Parameters}{19}{subsection.53}%
+\contentsline {subsection}{\numberline {6.5.2}Operation Modes}{19}{subsection.55}%
+\contentsline {subsection}{\numberline {6.5.3}Channels/Outputs}{19}{subsection.56}%
+\contentsline {section}{\numberline {6.6}Switching Mode Power Supply}{19}{section.57}%
+\contentsline {subsection}{\numberline {6.6.1}Parameters}{19}{subsection.58}%
+\contentsline {subsection}{\numberline {6.6.2}Operation Modes}{19}{subsection.59}%
+\contentsline {subsection}{\numberline {6.6.3}Channels/Outputs}{19}{subsection.60}%
+\contentsline {chapter}{\numberline {7}Interface Protocols}{20}{chapter.61}%
+\contentsline {section}{\numberline {7.1}USB Monitor}{20}{section.62}%
+\contentsline {section}{\numberline {7.2}CAN}{21}{section.63}%
+\contentsline {subsection}{\numberline {7.2.1}Overview}{21}{subsection.64}%
+\contentsline {subsection}{\numberline {7.2.2}General Structure}{22}{subsection.68}%
+\contentsline {subsection}{\numberline {7.2.3}ID Endcoding}{22}{subsection.69}%
+\contentsline {subsection}{\numberline {7.2.4}Auto-Messages}{22}{subsection.71}%
+\contentsline {subsection}{\numberline {7.2.5}Base-Addresses}{22}{subsection.72}%
+\contentsline {subsection}{\numberline {7.2.6}Commands}{23}{subsection.74}%
+\contentsline {subsubsection}{\numberline {7.2.6.1}10h --- Set 8bit Parameter}{23}{subsubsection.76}%
+\contentsline {subsubsection}{\numberline {7.2.6.2}11h --- Get 8bit Parameter}{23}{subsubsection.77}%
+\contentsline {subsubsection}{\numberline {7.2.6.3}14h --- Set 16bit Parameter}{24}{subsubsection.78}%
+\contentsline {subsubsection}{\numberline {7.2.6.4}15h --- Get 16bit Parameter}{24}{subsubsection.79}%
+\contentsline {subsubsection}{\numberline {7.2.6.5}20h --- Get Status Information}{24}{subsubsection.80}%
+\contentsline {subsubsection}{\numberline {7.2.6.6}40h --- Enable Output}{25}{subsubsection.81}%
+\contentsline {subsubsection}{\numberline {7.2.6.7}41h --- Disable Output}{25}{subsubsection.82}%
+\contentsline {subsubsection}{\numberline {7.2.6.8}60h --- Set Operation Mode}{25}{subsubsection.83}%
+\contentsline {subsubsection}{\numberline {7.2.6.9}61h --- Get Operation Mode}{26}{subsubsection.84}%
+\contentsline {subsection}{\numberline {7.2.7}Error Descriptions}{26}{subsection.85}%
+\contentsline {subsubsection}{\numberline {7.2.7.1}Status Byte}{26}{subsubsection.86}%
+\contentsline {section}{\numberline {7.3}ESP SPI}{27}{section.87}%
+\contentsline {section}{\numberline {7.4}Backplane SPI}{27}{section.88}%
+\contentsline {subsection}{\numberline {7.4.1}5V SPI}{27}{subsection.89}%
+\contentsline {subsection}{\numberline {7.4.2}3V3 SPI}{27}{subsection.90}%
+\contentsline {section}{\numberline {7.5}I2C}{27}{section.91}%
+\contentsline {subsection}{\numberline {7.5.1}Standard Mode}{27}{subsection.92}%
+\contentsline {subsection}{\numberline {7.5.2}Fast Mode}{27}{subsection.93}%

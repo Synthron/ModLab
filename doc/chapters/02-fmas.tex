@@ -1,0 +1,36 @@
+\chapter{FMAS}
+Now let's talk about the FMAS, what it is and why I keep in in my inventory.
+
+\section{Background}
+The FMAS, or \textit{\textbf{F}lexibles \textbf{M}odulares \textbf{A}usbildungs-\textbf{S}ystem} (Flexible Modular Training System), was part of my apprenticeship at the Karlsruhe Institute of Technology (KIT). It was used to teach how to design schematics, how to draw layouts and how to make PCBs (yes, we etched our own PCBs). Furthermore we were taught how to use measurement equipment, since once a PCB didn't work, the trainer basically just told us ``here are multimeter and oscilloscope, find your error''. As rude as that sounds, it made us think about the circuit, trace the signals around and see where we made the error. 
+
+The FMAS itself was built in a 3U rack with full enclosure, including the transformer, fuses and a regulator. We trainees built them ourselves from the provided kits.
+
+The further along we were with training, the more modules we had for it. During vacation when vocational school was closed or when we had nothing better to do (which happened to me a lot. I was a big nerd and quite fast compared to my fellow trainees) we made the modules for the FMAS, the documentation for it (after 4 or 5 modules, we had quite a good template for it, so that wasn't too much work) and then asked for the next project. 
+
+\section{The System}
+The FMAS itself was not up-to-date or highly integrated. The backplane bus consisted of 9V DC as well as 12V, 24V and 20V-0-20V AC voltages. All the other available lanes were unconnected and unused. So it got me thinking. 
+
+The modules themselves were completely discrete, so no programmable ICs or microcontrollers. A big advantage in case of there were no software bugs and to be honest, the circuits just \textit{worked}. Also it was not necessary to contemplate life choices over forgotten semikolons in the code while debugging for days with not much knowledge about programming. It just made life to our trainers and for us way easier. 
+
+The disadvantage I see on the concept itself. Nearly only AC voltages on the backplane means that we had to rectify, filter regulate the voltage on nearly every module. Also there was lots of space on the backplane to make something interesting. With relatively low effort one could connect the modules over serial interfaces with one another and make something interesting and a little bit more intelligent and up-to-date. 
+
+But as the motto goes: ``never change a running system'', so my trainers were not willing to change it.
+
+\section{Modules}
+The modules themselves are nothing special, but I will give you a list of them here. 
+
+\begin{itemize}
+\item Power Supplies: simple power supplies with LM317 and LM337 as well as one with LM723
+\item LED-Tester: Current Source and Voltmeter
+\item Waveform Generators: Discrete (fixed frequency) in different designs as well as a X2206CP-function generator
+\item Signal Tracer: a square wave generator with integrated speaker
+\item Logic Probe Tester: shows the logic level on a trace, simple discrete circuit
+\item LED-dice: your standard 1-6 dice...
+\item Continuity Tester: basically the same as the Signal Tracer
+\item other useless stuff like thermometers etc...
+\end{itemize}
+
+As you can see, some are useful, others are just for fun. 
+
+In the end I decided to discard the more useless modules because they really are just your basic ``My First Electronics Project'' kind of type\dots

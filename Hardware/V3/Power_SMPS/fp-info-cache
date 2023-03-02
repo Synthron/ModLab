@@ -1,0 +1,547 @@
+130368636231679
+Relay_THT
+Relay_1-Form-A_Schrack-RYII_RM5mm
+Relay, 1-Form-A, Schrack-RYII, RM5mm, SPST-NO
+Relay 1-Form-A Schrack-RYII RM5mm SPST-NO
+0
+4
+4
+Relay_THT
+Relay_1-Form-B_Schrack-RYII_RM5mm
+Relay, 1-Form-B, Schrack-RYII, RM5mm, SPST-NC
+Relay 1-Form-B Schrack-RYII RM5mm SPST-NC
+0
+4
+4
+Relay_THT
+Relay_1-Form-C_Schrack-RYII_RM3.2mm
+Relay, 1-Form-C, Schrack-RYII, RM3.2mm, SPDT
+Relay 1-Form-C Schrack-RYII RM3.2mm SPDT
+0
+5
+5
+Relay_THT
+Relay_1P1T_NO_10x24x18.8mm_Panasonic_ADW11xxxxW_THT
+Panasonic Relay SPST 10mm 24mm, https://www.panasonic-electric-works.com/pew/es/downloads/ds_dw_hl_en.pdf
+Panasonic Relay SPST
+0
+4
+4
+Relay_THT
+Relay_DPDT_AXICOM_IMSeries_Pitch3.2mm
+AXICOM IM-Series Relays, DPDR, Pitch 3.2mm, http://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Specification+Or+Standard%7F108-98001%7FV%7Fpdf%7FEnglish%7FENG_SS_108-98001_V_IM_0614_v1.pdf%7F4-1462039-1
+AXICOM IM-Series Relay DPDR Pitch 3.2mm
+0
+8
+8
+Relay_THT
+Relay_DPDT_AXICOM_IMSeries_Pitch5.08mm
+AXICOM IM-Series Relays, DPDR, Pitch 5.08
+AXICOM IM-Series Relay DPDR Pitch 5.08
+0
+8
+8
+Relay_THT
+Relay_DPDT_FRT5
+IM Signal Relay DPDT FRT5 narrow footprint
+Relay DPDT IM-relay FRT5
+0
+10
+10
+Relay_THT
+Relay_DPDT_Finder_30.22
+Finder 32.21-x000 Relay, DPDT, https://gfinder.findernet.com/public/attachments/30/EN/S30EN.pdf
+AXICOM IM-Series Relay SPDT
+0
+8
+8
+Relay_THT
+Relay_DPDT_Finder_40.52
+Relay DPDT Finder 40.52, Pitch 5mm/7.5mm, https://www.finder-relais.net/de/finder-relais-serie-40.pdf
+Relay DPDT Finder 40.52 Pitch 5mm
+0
+8
+8
+Relay_THT
+Relay_DPDT_Fujitsu_FTR-F1C
+https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf
+relay dpdt fujitsu tht
+0
+8
+8
+Relay_THT
+Relay_DPDT_Kemet_EC2
+Kemet signal relay, DPDT, non-latching, single coil latching, https://content.kemet.com/datasheets/KEM_R7002_EC2_EE2.pdf
+Kemet EC2 signal relay DPDT non single coil latching through hole THT
+0
+8
+8
+Relay_THT
+Relay_DPDT_Kemet_EC2_DoubleCoil
+Kemet signal relay, DPDT, double coil latching, https://content.kemet.com/datasheets/KEM_R7002_EC2_EE2.pdf
+Kemet EC2 signal relay DPDT double dual coil latching through hole THT
+0
+10
+10
+Relay_THT
+Relay_DPDT_Omron_G2RL
+Omron Relay DPDT, https://omronfs.omron.com/en_US/ecb/products/pdf/en-g2rl.pdf
+Omron Relay DPDT
+0
+8
+8
+Relay_THT
+Relay_DPDT_Omron_G5V-2
+http://omronfs.omron.com/en_US/ecb/products/pdf/en-g5v2.pdf
+Omron G5V-2 Relay DPDT
+0
+8
+8
+Relay_THT
+Relay_DPDT_Omron_G6H-2
+Omron relay G6H-2, see http://cdn-reichelt.de/documents/datenblatt/C300/G6H%23OMR.pdf
+Omron relay G6H-2
+0
+10
+10
+Relay_THT
+Relay_DPDT_Omron_G6K-2P
+Omron G6K-2P relay package http://omronfs.omron.com/en_US/ecb/products/pdf/en-g6k.pdf
+Omron G6K-2P relay
+0
+8
+8
+Relay_THT
+Relay_DPDT_Omron_G6K-2P-Y
+Omron G6K-2P-Y relay package http://omronfs.omron.com/en_US/ecb/products/pdf/en-g6k.pdf
+Omron G6K-2P-Y relay
+0
+8
+8
+Relay_THT
+Relay_DPDT_Omron_G6S-2
+Relay Omron G6S-2, see http://omronfs.omron.com/en_US/ecb/products/pdf/en-g6s.pdf
+Relay Omron G6S-2
+0
+8
+8
+Relay_THT
+Relay_DPDT_Omron_G6SK-2
+Relay Omron G6SK-2, see http://omronfs.omron.com/en_US/ecb/products/pdf/en-g6s.pdf
+Relay Omron G6SK-2
+0
+10
+10
+Relay_THT
+Relay_DPDT_Panasonic_JW2
+Panasonic Relay DPDT, http://www3.panasonic.biz/ac/e_download/control/relay/power/catalog/mech_eng_jw.pdf?via=ok
+Panasonic Relay DPDT
+0
+8
+8
+Relay_THT
+Relay_DPDT_Schrack-RT2-FormC-Dual-Coil_RM5mm
+Relay DPDT Schrack-RT2 RM5mm 16A 250V AC Form C http://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+Sheet%7FRT2_bistable%7F1116%7Fpdf%7FEnglish%7FENG_DS_RT2_bistable_1116.pdf%7F1-1415537-8
+Relay DPDT Schrack-RT2 RM5mm 16A 250V AC Relay
+0
+9
+9
+Relay_THT
+Relay_DPDT_Schrack-RT2-FormC_RM5mm
+Relay DPDT Schrack-RT2 RM5mm 16A 250V AC Form C http://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=RT2_reflow&DocType=DS&DocLang=EN
+Relay DPDT Schrack-RT2 RM5mm 16A 250V AC Relay
+0
+8
+8
+Relay_THT
+Relay_DPST_Fujitsu_FTR-F1A
+https://www.fujitsu.com/downloads/MICRO/fcai/relays/ftr-f1.pdf
+relay dpst fujitsu tht
+0
+6
+6
+Relay_THT
+Relay_DPST_Schrack-RT2-FormA_RM5mm
+Relay DPST Schrack-RT2 RM5mm 16A 250V AC Form A http://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=RT2_reflow&DocType=DS&DocLang=EN
+Relay DPST Schrack-RT2 RM5mm 16A 250V AC Relay
+0
+6
+6
+Relay_THT
+Relay_SPDT_Finder_32.21-x000
+Finder 32.21-x000 Relay, SPDT, https://gfinder.findernet.com/assets/Series/355/S32EN.pdf
+AXICOM IM-Series Relay SPDT
+0
+5
+5
+Relay_THT
+Relay_SPDT_Finder_34.51_Horizontal
+Relay SPDT, Finder Type34.51, horizontal form, see https://gfinder.findernet.com/public/attachments/34/EN/S34USAEN.pdf
+Relay SPDT Finder
+0
+5
+5
+Relay_THT
+Relay_SPDT_Finder_34.51_Vertical
+Relay SPDT, Finder Type34.51, vertical/standing form, see https://gfinder.findernet.com/public/attachments/34/EN/S34USAEN.pdf
+Relay SPDT Finder
+0
+5
+5
+Relay_THT
+Relay_SPDT_Finder_36.11
+FINDER 36.11, SPDT relay, 10A, https://gfinder.findernet.com/public/attachments/36/EN/S36EN.pdf
+spdt relay
+0
+5
+5
+Relay_THT
+Relay_SPDT_Finder_40.11
+Relay SPDT Finder 40.11, https://www.finder-relais.net/de/finder-relais-serie-40.pdf
+Relay SPDT Finder 40.11 
+0
+5
+5
+Relay_THT
+Relay_SPDT_Finder_40.31
+Relay DPDT Finder 40.31, Pitch 3.5mm/7.5mm, https://www.finder-relais.net/de/finder-relais-serie-40.pdf
+Relay DPDT Finder 40.31 Pitch 3.5mm
+0
+5
+5
+Relay_THT
+Relay_SPDT_Finder_40.41
+Relay DPDT Finder 40.41, Pitch 3.5mm/7.5mm, https://www.finder-relais.net/de/finder-relais-serie-40.pdf
+Relay DPDT Finder 40.41 Pitch 3.5mm
+0
+5
+5
+Relay_THT
+Relay_SPDT_Finder_40.51
+Relay DPDT Finder 40.51, Pitch 5mm/7.5mm, https://www.finder-relais.net/de/finder-relais-serie-40.pdf
+Relay DPDT Finder 40.51 Pitch 5mm
+0
+5
+5
+Relay_THT
+Relay_SPDT_HJR-4102
+IM Signal Relay SPDT HJR-4102
+Relay SPDT IM-relay HJR-4102
+0
+6
+6
+Relay_THT
+Relay_SPDT_HsinDa_Y14
+http://www.hsinda.com.cn/en/ProductShow.asp?ID=208
+Relay Y14
+0
+6
+6
+Relay_THT
+Relay_SPDT_Omron-G5LE-1
+Omron Relay SPDT, http://www.omron.com/ecb/products/pdf/en-g5le.pdf
+Omron Relay SPDT
+0
+5
+5
+Relay_THT
+Relay_SPDT_Omron-G5Q-1
+Relay SPDT Omron Serie G5Q, http://omronfs.omron.com/en_US/ecb/products/pdf/en-g5q.pdf
+Relay SPDT Omron Serie G5Q
+0
+5
+5
+Relay_THT
+Relay_SPDT_Omron_G5V-1
+Relay Omron G5V-1, see http://omronfs.omron.com/en_US/ecb/products/pdf/en-g5v_1.pdf
+Relay Omron G5V-1
+0
+6
+6
+Relay_THT
+Relay_SPDT_Omron_G6E
+Relay SPDT Omron Serie G6E
+Relay SPDT Omron Serie G6E 1x um
+0
+5
+5
+Relay_THT
+Relay_SPDT_Omron_G6EK
+Relay SPDT Omron Serie G6EK, see http://www.logosfoundation.org/instrum_gwr/pi/Omron_G6E_134P.pdf
+Relay SPDT Omron Serie G6EK
+0
+6
+6
+Relay_THT
+Relay_SPDT_Panasonic_JW1_FormC
+Panasonic Relay SPDT, http://www3.panasonic.biz/ac/e_download/control/relay/power/catalog/mech_eng_jw.pdf?via=ok
+Panasonic Relay SPDT
+0
+5
+5
+Relay_THT
+Relay_SPDT_PotterBrumfield_T9AP5D52_12V30A
+Relay SPDT Potter&Brumfield T9AP5D52 12V 30A 1xUn Connector Fast ON Only Dummy for Space NO Pads
+Relay SPDT Potter&Brumfield T9AP5D52 12V 30A 1xUm Connector Fast ON Flachsteckeranschluss Only Dummy for Space NO Pads
+0
+0
+0
+Relay_THT
+Relay_SPDT_RAYEX-L90
+https://a3.sofastcdn.com/attachment/7jioKBjnRiiSrjrjknRiwS77gwbf3zmp/L90-SERIES.pdf
+Relay RAYEX L90 SPDT
+0
+6
+6
+Relay_THT
+Relay_SPDT_RAYEX-L90S
+https://a3.sofastcdn.com/attachment/7jioKBjnRiiSrjrjknRiwS77gwbf3zmp/L90-SERIES.pdf
+Relay RAYEX L90S SPDT
+0
+5
+5
+Relay_THT
+Relay_SPDT_SANYOU_SRD_Series_Form_C
+relay Sanyou SRD series Form C http://www.sanyourelay.ca/public/products/pdf/SRD.pdf
+relay Sanyu SRD form C
+0
+5
+5
+Relay_THT
+Relay_SPDT_Schrack-RP-II-1-16A-FormC_RM5mm
+Relay SPST Schrack-RP-II/1 RM5mm 16A 250V AC Form C http://image.schrack.com/datenblaetter/h_rp810012-b.pdf
+Relay SPST Schrack-RP-II/1 RM5mm 16A 250V AC Relay
+0
+8
+5
+Relay_THT
+Relay_SPDT_Schrack-RP-II-1-FormC_RM3.5mm
+Relay SPST Schrack-RP-II/1 RM3.5mm 8A 250V AC Form C http://image.schrack.com/datenblaetter/h_rp810012-b.pdf
+Relay SPST Schrack-RP-II/1 RM3.5mm 8A 250V AC Relay
+0
+5
+5
+Relay_THT
+Relay_SPDT_Schrack-RP-II-1-FormC_RM5mm
+Relay SPST Schrack-RP-II/1 RM5mm 8A 250V AC Form C http://image.schrack.com/datenblaetter/h_rp810012-b.pdf
+Relay SPST Schrack-RP-II/1 RM5mm 8A 250V AC Relay
+0
+5
+5
+Relay_THT
+Relay_SPDT_Schrack-RT1-16A-FormC_RM5mm
+Relay SPST Schrack-RT1 RM5mm 16A 250V AC Form C http://image.schrack.com/datenblaetter/h_rt114012--_de.pdf
+Relay SPST Schrack-RT1 RM5mm 16A 250V AC Relay
+0
+8
+5
+Relay_THT
+Relay_SPDT_Schrack-RT1-FormC_RM3.5mm
+Relay SPST Schrack-RT1 RM3.5mm 8A 250V AC Form C http://image.schrack.com/datenblaetter/h_rt114012--_de.pdf
+Relay SPST Schrack-RT1 RM3.5mm 8A 250V AC Relay
+0
+5
+5
+Relay_THT
+Relay_SPDT_Schrack-RT1-FormC_RM5mm
+Relay SPST Schrack-RT1 RM5mm 8A 250V AC Form C http://image.schrack.com/datenblaetter/h_rt114012--_de.pdf
+Relay SPST Schrack-RT1 RM5mm 8A 250V AC Relay
+0
+5
+5
+Relay_THT
+Relay_SPDT_StandexMeder_SIL_Form1C
+Standex-Meder SIL-relais, Form 1C, see https://standexelectronics.com/wp-content/uploads/datasheet_reed_relay_SIL.pdf
+Standex Meder SIL reed relais
+0
+5
+5
+Relay_THT
+Relay_SPST_Finder_32.21-x300
+Finder 32.21-x300 Relay, SPST, https://gfinder.findernet.com/assets/Series/355/S32EN.pdf
+Finder 32.21-x300 Relay SPST
+0
+4
+4
+Relay_THT
+Relay_SPST_Omron-G5Q-1A
+Relay SPST-NO Omron Serie G5Q, http://omronfs.omron.com/en_US/ecb/products/pdf/en-g5q.pdf
+Relay SPST-NO Omron Serie G5Q
+0
+4
+4
+Relay_THT
+Relay_SPST_Panasonic_JW1_FormA
+Panasonic Relay SPST, http://www3.panasonic.biz/ac/e_download/control/relay/power/catalog/mech_eng_jw.pdf?via=ok
+Panasonic Relay SPST
+0
+4
+4
+Relay_THT
+Relay_SPST_PotterBrumfield_T9AP1D52_12V30A
+Relay SPST Potter&Brumfield T9AP1D52 12V 30A 1xEin Connector Fast ON Only Dummy for Space NO Pads
+Relau SPST Potter&Brumfield T9AP1D52 12V 30A 1xEin Connector Fast ON Flachsteckeranschluss Only Dummy for Space NO Pads
+0
+0
+0
+Relay_THT
+Relay_SPST_RAYEX-L90A
+https://a3.sofastcdn.com/attachment/7jioKBjnRiiSrjrjknRiwS77gwbf3zmp/L90-SERIES.pdf
+Relay RAYEX L90A SPST NO
+0
+5
+5
+Relay_THT
+Relay_SPST_RAYEX-L90AS
+https://a3.sofastcdn.com/attachment/7jioKBjnRiiSrjrjknRiwS77gwbf3zmp/L90-SERIES.pdf
+Relay RAYEX L90AS SPST NO
+0
+4
+4
+Relay_THT
+Relay_SPST_RAYEX-L90B
+https://a3.sofastcdn.com/attachment/7jioKBjnRiiSrjrjknRiwS77gwbf3zmp/L90-SERIES.pdf
+Relay RAYEX L90B SPST NC
+0
+5
+5
+Relay_THT
+Relay_SPST_RAYEX-L90BS
+https://a3.sofastcdn.com/attachment/7jioKBjnRiiSrjrjknRiwS77gwbf3zmp/L90-SERIES.pdf
+Relay RAYEX L90BS SPST NC
+0
+4
+4
+Relay_THT
+Relay_SPST_SANYOU_SRD_Series_Form_A
+relay Sanyou SRD series Form A http://www.sanyourelay.ca/public/products/pdf/SRD.pdf
+relay Sanyu SRD form A
+0
+4
+4
+Relay_THT
+Relay_SPST_SANYOU_SRD_Series_Form_B
+relay Sanyou SRD series Form B opener http://www.sanyourelay.ca/public/products/pdf/SRD.pdf
+relay Sanyu SRD form B opener
+0
+4
+4
+Relay_THT
+Relay_SPST_Schrack-RP-II-1-16A-FormA_RM5mm
+Relay SPST Schrack-RP-II/1 RM5mm 16A 250V AC Form A http://image.schrack.com/datenblaetter/h_rp810012-b.pdf
+Relay SPST Schrack-RP-II/1 RM5mm 16A 250V AC Relay
+0
+6
+4
+Relay_THT
+Relay_SPST_Schrack-RP-II-1-FormA_RM3.5mm
+Relay SPST Schrack-RP-II/1 RM3.5mm 8A 250V AC Form A
+Relay SPST Schrack-RP-II/1 RM3.5mm 8A 250V AC Relay
+0
+4
+4
+Relay_THT
+Relay_SPST_Schrack-RP-II-1-FormA_RM5mm
+Relay SPST Schrack-RP-II/1 RM5mm 8A 250V AC Form A http://image.schrack.com/datenblaetter/h_rp810012-b.pdf
+Relay SPST Schrack-RP-II/1 RM5mm 8A 250V AC Relay
+0
+4
+4
+Relay_THT
+Relay_SPST_Schrack-RP3SL-1coil_RM5mm
+Relay SPST Schrack-RP3SL, 1-coil-version, RM5mm 16A 250V AC Form A http://www.alliedelec.com/m/d/543c6bed18bf23a83ae5238947033ee0.pdf
+Relay SPST Schrack-RP3SL RM5mm 16A 250V AC Relay
+0
+6
+4
+Relay_THT
+Relay_SPST_Schrack-RP3SL_RM5mm
+Relay SPST Schrack-RP3SL RM5mm 16A 250V AC Form A http://www.alliedelec.com/m/d/543c6bed18bf23a83ae5238947033ee0.pdf
+Relay SPST Schrack-RP3SL RM5mm 16A 250V AC Relay
+0
+7
+5
+Relay_THT
+Relay_SPST_Schrack-RT1-16A-FormA_RM5mm
+Relay SPST Schrack-RT2 RM5mm 16A 250V AC Form C http://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=RT2_reflow&DocType=DS&DocLang=EN
+Relay SPST Schrack-RT2 RM5mm 16A 250V AC Relay
+0
+6
+4
+Relay_THT
+Relay_SPST_Schrack-RT1-FormA_RM3.5mm
+Relay SPST Schrack-RT1 RM3.5mm 8A 250V AC Form A
+Relay SPST Schrack-RT1 RM3.5mm 8A 250V AC Relay
+0
+4
+4
+Relay_THT
+Relay_SPST_Schrack-RT1-FormA_RM5mm
+Relay SPST Schrack-RT1 RM5mm 8A 250V AC Form C http://image.schrack.com/datenblaetter/h_rt114012--_de.pdf
+Relay SPST Schrack-RT1 RM5mm 8A 250V AC Relay
+0
+4
+4
+Relay_THT
+Relay_SPST_StandexMeder_MS_Form1AB
+Standex-Meder MS SIL-relais, Form 1A/1B, see https://standexelectronics.com/de/produkte/ms-reed-relais/
+Standex Meder MS SIL reed relais
+0
+4
+4
+Relay_THT
+Relay_SPST_StandexMeder_SIL_Form1A
+Standex-Meder SIL-relais, Form 1A, see https://standexelectronics.com/wp-content/uploads/datasheet_reed_relay_SIL.pdf
+Standex Meder SIL reed relais
+0
+4
+4
+Relay_THT
+Relay_SPST_StandexMeder_SIL_Form1B
+Standex-Meder SIL-relais, Form 1B, see https://standexelectronics.com/wp-content/uploads/datasheet_reed_relay_SIL.pdf
+Standex Meder SIL reed relais
+0
+4
+4
+Relay_THT
+Relay_SPST_TE_PCH-1xxx2M
+Miniature PCB Relay, PCH Series, 1 Form A (NO), SPST http://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+Sheet%7FPCH_series_relay_data_sheet_E%7F1215%7Fpdf%7FEnglish%7FENG_DS_PCH_series_relay_data_sheet_E_1215.pdf
+Relay SPST NO
+0
+4
+4
+Relay_THT
+Relay_SPST_TE_PCN-1xxD3MHZ
+https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1461491%7FG2%7Fpdf%7FEnglish%7FENG_CD_1461491_G2.pdf%7F3-1461491-0
+SPST relay slim
+0
+4
+4
+Relay_THT
+Relay_Socket_DPDT_Finder_96.12
+https://gfinder.findernet.com/public/attachments/56/DE/S56DE.pdf
+Relay socket DPDT Finder 96.12 56.32
+0
+8
+8
+Relay_THT
+Relay_StandexMeder_DIP_HighProfile
+package for Standex Meder DIP reed relay series, see https://standexelectronics.com/wp-content/uploads/datasheet_reed_relay_DIP.pdf
+DIL DIP PDIP 2.54mm 7.62mm 300mil reed relay
+0
+8
+8
+Relay_THT
+Relay_StandexMeder_DIP_LowProfile
+package for Standex Meder DIP reed relay series, see https://standexelectronics.com/wp-content/uploads/datasheet_reed_relay_DIP.pdf
+DIL DIP PDIP 2.54mm 7.62mm 300mil reed relay
+0
+8
+8
+Relay_THT
+Relay_StandexMeder_UMS
+Standex-Meder SIL-relais, UMS, see http://cdn-reichelt.de/documents/datenblatt/C300/UMS05_1A80_75L_DB.pdf
+Standex Meder SIL reed relais
+0
+4
+4

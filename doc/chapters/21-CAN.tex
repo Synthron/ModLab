@@ -1,0 +1,369 @@
+\section{CAN}
+\subsection{Overview}
+The CAN bus is the main communication bus for the ModLab. The HBC is sequentially talking to all the connected modules and sending commands to them if needed. This includes regular status updates as well as configurations. The CAN bus itself is divided into seperate layers, which will be discussed now. 
+
+\begin{enumerate}
+    \item \textbf{Physical Layer}\\
+    The physical layer of the CAN interface consists of the CAN module on the STM32 controllers as well as a SN65VHD232 CAN Transceiver. CAN Rx and TX are sent on the same differential interface, making the bus half-duplex. 
+
+    In order to get enough data around in a feasable time, the Interface will be clocked at 1MHz speed. 
+    \item \textbf{Transport Layer}\\
+    The transport layer descibes the way the data will be sent. Since standard CAN frames can only handle 8 bytes at once, I thought about implementing something here, to increase the data transfer. 
+    
+    After careful thinking tho, I decided agains a special transport protocol like ISO-TP, because the overhead creates more delays than I am comfortable with. I just have to be careful designing the command structure to not include commands with too many arguments.
+
+    \item \textbf{Application Layer}\\
+    Here is, where it gets interesting. After we can now send plenty of data, I need to define the actual transmission protocol of the payload for the modules. Since CAN is designed as such that every node reads the data at the same time, I have to implement a procedure to let the modules decide if the received message is of interest for them or not. 
+
+    This can be achieved with two different methods. One is by encoding the module address in the ID section of the module, the other is sending the module in question as first byte in the payload. 
+
+    I decided to implement the first option to save on transmission time. The ID field in the datagrams will be used both for encoding the module address, as well as indicaton for special cases like warnings and errors in my protocol. Also with this method I can selectively talk to each module without blocking processing time for checking if the message is really meant for them. 
+
+    To clarify: if I talk about address, I mean the module address. I will refer to the ID as a whole (address + Message Type) as ID.
+\end{enumerate}
+
+\newpage
+
+\subsection{General Structure}
+The general structure of the protocol uses a ping---pong approach. The command value sent to the module will always be returned to the sender as well to clarify that this is the reply tho this command. Even tho I might sacrifice some bandwidth with this method, I think it will be worthwhile in future implementations. 
+
+Because of this, the structure is always ``Command --- Value'' in both directions.
+
+\subsection{ID Endcoding}
+The ID structure will be used as specified in the following table. The ``xx'' in the ID will be placeholders for the module address. 
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{ID}   &   \multicolumn{1}{|c|}{\textbf{Type}}\\ \hline \hline
+        7xxh   &   Auto Message (informational) \\ \hline
+        6xxh   &   Reply to Command (ACK)  \\  \hline
+        5xxh   &   Standard Command    \\ \hline
+        4xxh   &   Warnings / State Changes\\ \hline
+        3xxh   &   Reply to Command (NACK) \\  \hline
+        2xxh   &   Processing Error    \\ \hline
+        1xxh   &   Critical Error      \\ \hline
+        0xxh   &   reserved \\ \hline
+    \end{tabular}
+    \caption{CAN-Messages}
+    \label{tab:CAN-Messages}
+\end{table}
+
+\subsection{Auto-Messages}
+\textbf{\textcolor[HTML]{FF0000}{TBD}}
+
+\subsection{Base-Addresses}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Base Address}   &   \multicolumn{1}{|c|}{\textbf{Module}}\\ \hline \hline
+        10h    &   HBC    \\ \hline
+        20h    &   Diode Tester \\ \hline
+        30h    &   Symmetrical Linear Power supply \\ \hline
+        34h    &   reserved \\ \hline
+        38h    &   reserved \\ \hline
+        3Ch    &   24V Switching Mode Power Supply \\\hline
+        40h    &   DDS Waveform Generator \\ \hline
+    \end{tabular}
+    \caption{CAN Addresses}
+    \label{tab:CAN-ADD}
+\end{table}
+
+\newpage
+
+\subsection{Commands}
+Overview:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Value}   &   \multicolumn{1}{|c|}{\textbf{Command}}\\ \hline \hline \hline
+        01h    &   Reset Module \\ \hline
+
+        \hline
+        10h    &   Set 8bit Parameter    \\ \hline
+        11h    &   Get 8bit Parameter     \\ \hline
+        14h    &   Set 16bit Parameter   \\ \hline
+        15h    &   Get 16bit Parameter    \\ \hline 
+        \hline
+        20h    &   Get Status Information \\ \hline 
+        \hline
+        40h    &   Enable Output       \\ \hline
+        41h    &   Disable Output      \\ \hline 
+        \hline
+        60h    &   Set Operation Mode  (TBD)\\ \hline
+        61h    &   Get Operation Mode  (TBD)\\ \hline 
+    \end{tabular}
+    \caption{CAN-Commands}
+\label{tab:CAN-Commands}
+\end{table}
+
+%-------------------------------
+\subsubsection{10h --- Set 8bit Parameter}
+Write 8bit value to module parameter. 
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        10h   &  1 Byte & Set 8bit Parameter Command \\ \hline
+        Index & 1 Byte  & Parameter Index, see Module Description \\ \hline
+        Value & 1 Byte & Value to be written\\ \hline
+    \end{tabular}
+\label{tab:CAN-10-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        10h   &  1 Byte & Set 8bit Parameter Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status in case of NACK \\ Otherwise set to 0\\see Error Descriptions}\\ \hline
+    \end{tabular}
+\label{tab:CAN-10-R}
+\end{table}
+
+%-------------------------------
+\subsubsection{11h --- Get 8bit Parameter}
+Read 8bit value from module parameter.
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        11h   &  1 Byte & Get 8bit Parameter Command \\ \hline
+        Index & 1 Byte  & Parameter Index, see Module Description \\ \hline
+    \end{tabular}
+\label{tab:CAN-11-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        11h   &  1 Byte & Get 8bit Parameter Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status in case of NACK \\ Otherwise set to 0\\see Error Descriptions}\\ \hline
+        Value & 1 Byte & Value to be read; 0 if NACK \\ \hline
+    \end{tabular}
+\label{tab:CAN-11-R}
+\end{table}
+
+%-------------------------------
+\subsubsection{14h --- Set 16bit Parameter}
+Write 16bit value to module parameter.
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        14h   &  1 Byte & Set 16bit Parameter Command \\ \hline
+        Index & 1 Byte  & Parameter Index, see Module Description \\ \hline
+        Value & 2 Byte & Value to be written\\ \hline
+    \end{tabular}
+\label{tab:CAN-14-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        14h   &  1 Byte & Set 16bit Parameter Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status in case of NACK \\ Otherwise set to 0\\see Error Descriptions}\\ \hline
+    \end{tabular}
+\label{tab:CAN-14-R}
+\end{table}
+\subsubsection{15h --- Get 16bit Parameter}
+Read 16bit value from module parameter.
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        15h   &  1 Byte & Get 16bit Parameter Command \\ \hline
+        Index & 1 Byte  & Parameter Index, see Module Description \\ \hline
+    \end{tabular}
+\label{tab:CAN-15-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        15h   &  1 Byte & Get 16bit Parameter Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status in case of NACK \\ Otherwise set to 0\\see Error Descriptions}\\ \hline
+        Value & 2 Byte & Value to be read; 0 if NACK \\ \hline
+    \end{tabular}
+\label{tab:CAN-15-R}
+\end{table}
+
+%-------------------------------
+\subsubsection{20h --- Get Status Information}
+Get status information from module.
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        20h   &  1 Byte & Get Status Information Command \\ \hline
+    \end{tabular}
+\label{tab:CAN-20-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        20h   &  1 Byte & Get 16bit Parameter Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status\\see Error Descriptions}\\ \hline
+        Channel Info & 1 Byte & \makecell[l]{bit 0..3: PWM-Channel 0..3\\bit 4..5: ADC-Channel 0..3\\bits are 0 if channel not implemented} \\ \hline
+    \end{tabular}
+\label{tab:CAN-20-R}
+\end{table}
+%-------------------------------
+\subsubsection{40h --- Enable Output}
+Enable the Module Output.
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        40h   &  1 Byte & Enable Output Command \\ \hline
+    \end{tabular}
+\label{tab:CAN-40-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        40h   &  1 Byte & Enable Output Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status\\see Error Descriptions}\\ \hline
+    \end{tabular}
+\label{tab:CAN-40-R}
+\end{table}
+%-------------------------------
+\subsubsection{41h --- Disable Output}
+Disable the Module Output.
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        41h   &  1 Byte & Disable Output Command \\ \hline
+    \end{tabular}
+\label{tab:CAN-41-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        41h   &  1 Byte & Disable Output Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status\\see Error Descriptions}\\ \hline
+    \end{tabular}
+\label{tab:CAN-41-R}
+\end{table}
+%-------------------------------
+\subsubsection{60h --- Set Operation Mode}
+Set Module into Operation Mode x. 
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        60h   &  1 Byte & Set Operation Mode Command \\ \hline
+        Mode & 1 Byte & Operation Mode, see Module Description\\ \hline
+    \end{tabular}
+\label{tab:CAN-60-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        60h   &  1 Byte & Set Operation Mode Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status in case of NACK \\ Otherwise set to 0\\see Error Descriptions}\\ \hline
+    \end{tabular}
+\label{tab:CAN-60-R}
+\end{table}
+
+\subsubsection{61h --- Get Operation Mode}
+Get Module Operation Mode. 
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        61h   &  1 Byte & Get Operation Mode Command \\ \hline
+    \end{tabular}
+\label{tab:CAN-61-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        61h   &  1 Byte & Get Operation Mode Command \\ \hline
+        Mode & 1 Byte & Operation Mode, see Module Description\\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status in case of NACK \\ Otherwise set to 0\\see Error Descriptions}\\ \hline
+    \end{tabular}
+\label{tab:CAN-61-R}
+\end{table}
+
+%-------------------------------
+
+
+\subsection{Error Descriptions}
+\subsubsection{Status Byte}
+Description of the Status Byte in Reply Messages. If a Bit is set to 0, it is inactive. A 1 indicates an active error.
+
+The lower Nibble indicates protocol errors, a mismatch condition can mean both ``not available'' and ``wrong length''. 
+
+The upper Nibble indicates internal errors of the module. 
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Bit}   & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        0   &    Index Mismatch   \\ \hline
+        1   &    Data Mismatch   \\ \hline
+        2   &    Channel Mismatch   \\ \hline
+        3   &    Operation Mode Mismatch  \\ \hline
+        4   &    Processing Error   \\ \hline
+        5   &    I/O Error   \\ \hline
+        6   &    Unknown Command   \\ \hline
+        7   &    reserved   \\ \hline
+    \end{tabular}
+\label{tab:CAN-status}
+\end{table}
+

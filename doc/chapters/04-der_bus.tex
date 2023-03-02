@@ -1,0 +1,112 @@
+\chapter{The Bus}
+The Bus, or more specifically the backplane bus, is connecting all the modules together. It has all necessary supply voltages as well as all traces for the IO. For this reason, this part took a while.
+
+\section{Voltages}
+In order to keep things simple but functional, I decided to plate 4 voltages on the bus. What they are and there uses are outlined below.
+
+\subsection{5V}
+I don't think this needs a lot of explanation. Even tho most modules will run on 3V3, I might want to use other controllers or peripherals which run on 5V. For the most part, I will use Low-Dropout regulators to go to 3V3, even tho there will be quite a few of them. 
+
+The Power Supply for the 5V can provide up to 15A, but I will put a 10A fuse in line. I think this will be more than enough for my uses.
+
+\subsection{24V}
+What would be a big project without decent power? Correct: BORING. So, especially for bigger power supplies, I included 24V. This will have a 10A fuse as well, I don't think I will need much more for most projects. And if I will have some really power-hungry ideas in the future, they should have an integrated power supply anyways. 
+
+\subsection{Symmetric 30V (-15V..+15V)}
+Ok, some of you might ask ``what the hell is that even used for???''
+
+Hear me out. Even tho I am way more comfortable with digital circuits, there exists something called analog circuits. And especially for these I might need these voltages a lot. Examples would be amplifier circuits, waveform generators as well as different IO interfaces. 
+
+Also I want to explore more power supply designs for negative voltages, this can come in handy. 
+
+\section{Interfaces}
+The modules need to talk to each other, therefore there have to be some interfaces on the bus. To keep it modular, I decided to include several different ones. These are explained in a bit more detail here.
+
+\subsection{I2C}
+I2C (or $I^2C$, IIC, \textit{Inter Integrated Circuit} etc..) is one of my favourite interfaces, because it is simple, easy to implement and I worked with it a lot. It supports up to 128 different nodes which is more than plenty and doesn't need a whole lot of chip-select signals. 
+
+Actually I implemented two I2C interfaces, one at 100kHz standard frequency and one at 400kHz. 
+
+Even tho it is a widely used interface for tons of peripherals, it will be mainly used as backup or for small periodical data packets. This will keep the main interface more free for other uses. 
+
+\subsection{RS485}
+RS485 is included, because I want to explore a protocoll called ModBUS. This might come in handy for other projects. Maybe this will be used more later, for now it is just there to have it. 
+
+\subsection{SPI}
+SPI (Serial Peripheral Interface) is a really common bus for a lot of things. It can go to quite high data rates, but also needs a chip-select for every node. For this reason, some dedicated IO lines are used as Chip Selects. If they are used as-is or if I decode them is still subject to debate. 
+
+Also I actually have two SPI interfaces on the bus. one at 5V and one at 3V3. This will help integrating different controllers or peripherals to the system without a lot of level-shifting and thus introducing delays and synchronization issues. 
+
+\subsection{CAN}
+The CAN (Controller Area Network) interface will be the main workhorse interface of the system. It can support a lot of nodes and due to it being a differential interface should work pretty reliably. 
+
+The downside is, that it needs a transceiver for every node but oh well. 
+
+My current plan is to use the ISO-TP protocol for it. This way I can send more than a maximum of 8 bytes per data transfer, but this might slow down the interface a bit. Because of this, I will operate the interface at 1Mbit/s datarate. 
+
+\section{I/Os}
+Of course I will need some general IOs on the bus to control different things. Here a small summary. 
+
+\subsection{Digital}
+There are 6 general IOs on the backplane. These can be used as status signals (error, interrupt) or to do some fun things I still have to come up with. 
+
+Also there are 6 dedicated Chip-Selects for the SPI interfaces. This way I can selectively address them. 
+
+All IOs are 5V compatible.
+
+At first I wanted to include some form of slot address encoding, but yeah... that idea was scrapped pretty early because I would need quite a few pins for that. 
+
+\subsection{DACs}
+Two DAC-channels from the Host Bus Controller (more on that later) are also on the bus. My plan is to use them with a speaker module to make really annoying system notification, like startup-melodies, error-notifications, acoustic signals for different events from submodules etc. 
+
+Let's see what will come out of that.
+
+\section{Layout}
+Ok, now that we have talked about what signals will be on the backplane, let's see how it is layed out. 
+
+I settled with the DIN 41612 64pin A-C connectors. These will fit well with the Rack-design as well as provide enough pins for everything. 
+
+I decided to give the supply voltages 4 pins each to maximize possible current draw. Also I placed some GND-pins in the middle as well. This left only a few pins for all the signals. 
+
+here is what I came up with.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|r|c|c|l|}
+                              	& 	a  	& 	c 	&   										\\ \hline \hline
+\cellcolor[HTML]{FE0000}5V    	& 	1  	& 	1  	& 	\cellcolor[HTML]{FE0000}5V       		\\ \hline
+\cellcolor[HTML]{FE0000}5V    	& 	2  	& 	2  	& 	\cellcolor[HTML]{FE0000}5V       		\\ \hline
+\cellcolor[HTML]{0066ff}GND   	& 	3  	& 	3  	& 	\cellcolor[HTML]{0066ff}GND     		\\ \hline
+\cellcolor[HTML]{0066ff}GND   	& 	4  	& 	4  	& 	\cellcolor[HTML]{0066ff}GND     		\\ \hline
+\cellcolor[HTML]{FE0000}24V   	& 	5  	& 	5  	& 	\cellcolor[HTML]{FE0000}24V     		\\ \hline
+\cellcolor[HTML]{FE0000}24V   	& 	6  	& 	6  	& 	\cellcolor[HTML]{FE0000}24V     		\\ \hline
+\cellcolor[HTML]{0066ff}GND   	& 	7  	& 	7  	& 	\cellcolor[HTML]{0066ff}GND     		\\ \hline
+\cellcolor[HTML]{0066ff}GND   	& 	8  	& 	8  	& 	\cellcolor[HTML]{0066ff}GND     		\\ \hline
+\cellcolor[HTML]{9B9B9B}CAN+   	& 	9  	& 	9  	& 	\cellcolor[HTML]{9B9B9B}CAN-       		\\ \hline
+\cellcolor[HTML]{F8FF00}IO0   	& 	10 	& 	10 	& 	\cellcolor[HTML]{F8FF00}IO1          	\\ \hline
+\cellcolor[HTML]{9B9B9B}SDA\_FM  	& 	11 	& 	11 	& 	\cellcolor[HTML]{9B9B9B}SCL\_FM            	\\ \hline
+\cellcolor[HTML]{F8FF00}IO2  	& 	12 	& 	12 	& 	\cellcolor[HTML]{F8FF00}IO2            	\\ \hline
+\cellcolor[HTML]{9B9B9B}SDA    	& 	13 	& 	13 	& 	\cellcolor[HTML]{9B9B9B}SCL             	\\ \hline
+\cellcolor[HTML]{F8FF00}IO4    	& 	14 	& 	14 	& 	\cellcolor[HTML]{F8FF00}IO5            	\\ \hline
+\cellcolor[HTML]{9B9B9B}RS485+    	& 	15 	& 	15 	& 	\cellcolor[HTML]{9B9B9B}RS485-           	\\ \hline
+\cellcolor[HTML]{0066ff}GND   	& 	16 	& 	16 	& 	\cellcolor[HTML]{0066ff}GND            	\\ \hline
+\cellcolor[HTML]{0066ff}GND   	& 	17 	& 	17 	& 	\cellcolor[HTML]{0066ff}GND         	\\ \hline
+\cellcolor[HTML]{996633}DAC0  	& 	18 	& 	18 	& 	\cellcolor[HTML]{996633}DAC1         	\\ \hline
+\cellcolor[HTML]{32CB00}CS0    	& 	19 	& 	19 	& 	\cellcolor[HTML]{32CB00}CS1             	\\ \hline
+\cellcolor[HTML]{FFC702}MOSI1    	& 	20 	& 	20 	& 	\cellcolor[HTML]{FFC702}MISO1             	\\ \hline
+\cellcolor[HTML]{32CB00}CS2    	& 	21 	& 	21 	& 	\cellcolor[HTML]{32CB00}CS3             	\\ \hline
+\cellcolor[HTML]{FFC702}SCK1    	& 	22 	& 	22 	& 	\cellcolor[HTML]{FFC702}SCK2           	\\ \hline
+\cellcolor[HTML]{32CB00}CS4 	& 	23 	& 	23 	& 	\cellcolor[HTML]{32CB00}CS5      		\\ \hline
+\cellcolor[HTML]{FFC702}MOSI2 	& 	24 	& 	24 	& 	\cellcolor[HTML]{FFC702}MISO2           	\\ \hline
+\cellcolor[HTML]{FE0000}+15V  	& 	25 	& 	25 	& 	\cellcolor[HTML]{FE0000}+15V           	\\ \hline
+\cellcolor[HTML]{FE0000}+15V  	& 	26 	& 	26 	& 	\cellcolor[HTML]{FE0000}+15V       		\\ \hline
+\cellcolor[HTML]{0066ff}GND   	& 	27 	& 	27 	& 	\cellcolor[HTML]{0066ff}GND         	\\ \hline
+\cellcolor[HTML]{0066ff}GND   	& 	28 	& 	28 	& 	\cellcolor[HTML]{0066ff}GND          	\\ \hline
+\cellcolor[HTML]{FE0000}-15V  	& 	29 	& 	29 	& 	\cellcolor[HTML]{FE0000}-15V         	\\ \hline
+\cellcolor[HTML]{FE0000}-15V  	& 	30 	& 	30 	& 	\cellcolor[HTML]{FE0000}-15V          	\\ \hline
+\cellcolor[HTML]{0066ff}GND   	& 	31 	& 	31 	& 	\cellcolor[HTML]{0066ff}GND         	\\ \hline
+\cellcolor[HTML]{0066ff}GND   	& 	32 	& 	32 	& 	\cellcolor[HTML]{0066ff}GND 			\\ \hline
+\end{tabular}
+\caption{Bus-Layout}
+\label{tab:Bus-Layout}
+\end{table}

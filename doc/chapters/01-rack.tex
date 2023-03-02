@@ -1,0 +1,66 @@
+\chapter{The Rack}
+As I said in the introduction, the ModLab actually consists of two parts. To keep it simple, I will do the following: If I speak about the ModLab, I mean the ModLab itself in the upper 6U. The rack itself (which will be explained here) and the FMAS are talked about seperately. 
+
+So now let's talk about the rack.
+
+\section{The Idea}
+When I sat down at the drawing board (ok, I admit, it was Excel...) and the first thoughts in mind had, I quickly decided to make everything just bigger. The reason was, that just one 3U rack was a bit too small (e.g. the FMAS rack only had 6 slots, but 12 available modules). Coincidentally I got my hands on a 20U 19``-rack which should be plenty for my use. But now there was a new issue: next to being big and heavy, I needed to include an electric installation for the subsystems. But this will be tackled a bit later.
+
+\section{Planning it out}
+Planning out the sections of the rack was done in Excel, so no big calculations for you here, but oh well\dots
+
+So I had 20U to spend and I had a lot to put in there. Thankfully, the rack has a front and a back side. For convenience I decided the ``user side'' would be only on the front, the installation and support systems would be on the back. The first thought was that the whole front would consist of 3U subracks, but that would be a bit much and I still needed the control circuits as well as cable channels, power supplies etc. 
+
+I decided to dedicate two 3U subracks to the ModLab and the FMAS respectively, this would reserve 5U for the control panel and cable management. This way, I can save up space on my workbench by storing the FMAS as well as having plenty of space for the ModLab modules.
+
+After a bit of time, I came up with the following. I am quite happy how it turned out, so this will hopefully last until the end of it.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|r|c|c|}
+\hline
+\textbf{U}	&	\textbf{Front}	&	\textbf{back}		\\ \hline \hline
+20	&			&	Cover Plate		    \\ \cline{1-1}
+19	&	ModLab	&	Power Supplies		    \\ \cline{1-1}
+18	&			&	24V \& 5V		    \\ \hline
+17	&			&	Cover Plate		    \\ \cline{1-1}
+16	&	ModLab	&	Power Supplies	    \\ \cline{1-1}
+15	&			&	15V \& -15V	        \\ \hline
+14	&			&	Cover Plate         \\ \cline{1-1}
+13	&	Control Panel	&	Filter		\\ \cline{1-1}
+12	&			&	Fuses			        \\ \hline
+11	&	    	&	            		\\ \cline{1-1}
+10	&	DIN-Rail	&	DIN-Rail		\\ \cline{1-1}
+9	&	        &                   	\\ \cline{1-1}
+8   &           &                       \\ \cline{1-1}
+7	&	Cable Channel	&	Cable Channel		\\ \hline
+6	&			&	Cover Plate		    \\ \cline{1-1}
+5	&	FMAS	&	Voltage Regulator   \\ \cline{1-1}
+4	&			&	Fuses	        \\ \hline
+3	&			&	Cover Plate		    \\ \cline{1-1}
+2	&	FMAS	&	Mains Connector	    \\ \cline{1-1}
+1	&			&	Transformer			    \\ \hline
+
+\end{tabular}
+\caption{Rack Overview}
+\label{tab:Rack Overview}
+\end{table}
+
+\section{Construction}
+So I ordered everything I needed and took some time to draw schematics, drill out the cover plates, assemble everything and soon I was done.
+
+Well, if only it was that easy\dots
+
+I took my time for every step just to avoid big errors. I made the electric schematic with the software ``QElectroTech'' and even of this schematic, there are many revisions. 
+
+With the plan done, I finally knew what devices and how many terminal blocks I needed. With this in mind I was able to prepare the cover plates and assemble them. In the meantime I designed the backplane for the ModLab, so I could already order them and assemble the subracks. 
+
+The control panel is used to enable power to the different parts of the rack as well as being home to the most important big red ``OH SHIT''-button. This way, only the parts that will be used are powered. The main control voltage is enabled by a seperate switch for a bit more extra safety. 
+
+The switched power supplies for the ModLab made me some headaches. According to their datasheets they can use up to 40A at 230V in the moment of power-up. Since I got four of them in parallel, I was worried about the 160A current spike in the mains blowing the fuses in my fusebox. So I got a current limiter which is actively limiting the current during the first 70ms of power-up and then switching over to unlimited. This will definitely save my fusebox as well as the cables in the wall (and not to forget the contacts in the relais making the connections). 
+
+The transformer for the FMAS is the original one used for it, so the old rack for it got completely disassembled. 
+
+\vspace{1cm}
+
+While the power lines for the FMAS are soldered directly to the backplanes of the subracks, I decided to use high-current DIN 41612 H15-connectors for the ModLab. This way I can partially disassemble the rack for transportation or make it easier to make changes or upgrades to the rack or subracks. Also the connectors are made for use in 3U subracks, so easy to implement and with the use of cable slugs really modular. 

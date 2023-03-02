@@ -1,0 +1,193 @@
+% --------------------------------------------------------------------
+% Technical Documentation
+% Marco Müller
+% --------------------------------------------------------------------
+
+\documentclass[11pt, a4paper, listof=numbered, captions=tableheading, headinclude, table, xcdraw]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{tikz}
+\usepackage{epigraph}
+%\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{textgreek}
+\usepackage[LGRgreek]{mathastext}
+\usepackage{array}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{helvet}
+\usepackage{scrhack}
+\usepackage{wrapfig}
+\usepackage{makecell}
+\renewcommand{\familydefault}{\sfdefault}
+
+\setcounter{secnumdepth}{4} % give subsubsection numbers
+
+\setlength{\emergencystretch}{\hsize}
+\tolerance=9999
+
+\newcounter{divide}
+
+% für referenziertes Inhaltsverzeichnis
+\usepackage[hidelinks, hypertexnames=false]{hyperref}
+
+\usepackage{chngcntr}
+\counterwithin*{chapter}{divide}
+
+\renewcommand\epigraphflush{flushright}
+\renewcommand\epigraphsize{\normalsize}
+\setlength\epigraphwidth{0.7\textwidth}
+
+\definecolor{titlepagecolor1}{cmyk}{.82,.24,0,.11}
+\definecolor{titlepagecolor}{cmyk}{0,.33,.98,.2}
+
+\DeclareFixedFont{\titlefont}{T1}{ppl}{b}{it}{0.5in}
+
+\setlength{\parindent}{0pt}
+
+
+% Seitenränder festlegen
+\usepackage[top=1.5cm,bottom=1.5cm, includeheadfoot]{geometry}
+
+% ---------------------------------------
+% Titeldefinition
+\newcommand{\Titel}{Documentation\\\vspace{.5mm}ModLab V3.0}
+\newcommand{\Caption}{for the modular laboratory station ModLab}
+\newcommand{\SignateAuthor}{\textit{Made with \LaTeX}}
+\newcommand{\Stand}{\textit{Compiled: \today}}
+% Sonstiges in titel.ltx und titel-meta.ltx
+% ---------------------------------------
+
+% Kopf- und Fußzeile
+\usepackage[automark]{scrlayer-scrpage}
+
+% --------------------------------------------------------------------
+% Titelblatt
+% --------------------------------------------------------------------
+
+\input{titel/titel-meta.tex}
+\begin{document}
+\input{titel/titel.tex}
+
+% --------------------------------------------------------------------
+% Verzeichnisse
+% --------------------------------------------------------------------
+
+\pagenumbering{Roman}
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+\setcounter{tocdepth}{1} %Ausblenden von Subsections etc..
+\cohead[I Table Of Contents]{I Table Of Contents}
+\pagestyle{scrheadings}
+\tableofcontents 	\newpage
+\cohead[II List of Tables]{II List of Tables}
+\pagestyle{scrheadings}
+\listoftables 		\newpage
+\cohead[III List of Figures]{III List of Figures}
+\pagestyle{scrheadings}
+\listoffigures 		\newpage
+\pagenumbering{arabic}
+
+\stepcounter{divide}
+
+\renewcommand{\thechapter}{\arabic{chapter}}
+
+% Kopfzeilen erst nach den Verzeichnissen
+
+\lohead[\today]{\today}
+\cohead[ModLab V3.0]{ModLab V3.0}
+\rohead[Synthron]{Synthron}
+\pagestyle{scrheadings}
+
+% --------------------------------------------------------------------
+% Ab hier der Inhalt
+% --------------------------------------------------------------------
+
+\input{chapters/00-vorwort.tex} 			\newpage 	% Vorwort über die Entstehungsgeschichte
+\input{chapters/01-rack.tex}				\newpage 	% Der Rackaufbau und Erläuterung
+\input{chapters/02-fmas.tex}				\newpage 	% Kurze Ausführung zum FMAS
+\input{chapters/03-modlab.tex}				\newpage 	% Systemüberblick und Einführung ModLab, 
+\input{chapters/04-der_bus.tex} 			\newpage 	% Backplanebus
+\input{chapters/10-modules.tex}				\newpage 	% Modules
+\input{chapters/20-protocols.tex}			\newpage	% Protocol
+\input{chapters/21-CAN.tex}\newpage
+\section{ESP SPI}
+\textbf{\textcolor[HTML]{FF0000}{TBD}}
+
+\section{Backplane SPI}
+\textbf{\textcolor[HTML]{FF0000}{TBD}}
+\subsection{5V SPI}
+\textbf{\textcolor[HTML]{FF0000}{TBD}}
+\subsection{3V3 SPI}
+\textbf{\textcolor[HTML]{FF0000}{TBD}}
+
+\section{I2C}
+\textbf{\textcolor[HTML]{FF0000}{TBD}}
+\subsection{Standard Mode}
+\textbf{\textcolor[HTML]{FF0000}{TBD}}
+\subsection{Fast Mode}
+\textbf{\textcolor[HTML]{FF0000}{TBD}}
+
+
+% --------------------------------------------------------------------
+% abschließende Verzeichnisse
+% --------------------------------------------------------------------
+
+\pagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\hrulefill\\
+\vspace{4mm}
+	\begin{HUGE}
+		\textbf{Addenda}
+	\end{HUGE}\\
+\hrulefill\\
+\end{center}
+\vspace*{\fill}
+\newpage
+\pagestyle{plain}
+
+
+\appendix
+%\input{appendix/.ltx}		\newpage 	% Anhang
+%\input{appendix/.ltx}		\newpage 	% Anhang
+%\chapter{Anhang Sym-LNT}			
+%\textcolor{blue}{\href{https://sites.google.com/site/ddmcintosh2projects/_/rsrc/1339000657272/diy-cv-cc-bench-power-supply/BenchPowerSupplySchematics.jpg}{Vorlage}}\\
+%\textcolor{blue}{\href{https://sites.google.com/site/ddmcintosh2projects/diy-cv-cc-bench-power-supply}{Original Site}}\\
+%Spannungsteiler für Verstärkungsfaktor $\frac{1}{256}$ \\
+%Oversampling für Spannungsvorgabe um auf 16bit zu kommen:\\
+%$R2/R1= 2,564 = 10k/3k9 -> R2/R1 = 256,4 = 100k/390$
+%
+%\chapter{Anhang Power-LNT}
+%\textcolor{blue}{\href{https://www.electronics-lab.com/project/ampstrike-battery-powered-bench-power-supply/}{Vorlage}}
+%
+%
+%\chapter{Anhang Oszilloskop}
+%Falls Ansatz mit DSO138:\\
+%DC/DC-Wandler: R05P209S\\
+%Liefert 220mA, mit 78L05 Spannung für ATmega erzeugen.\\
+%DSO138 braucht 9V mit 120mA\\
+%ADUM 1250 ARZ I2C-Isolator\\
+%Trigger-LED für evtl als Sync-Ausgang?
+%
+%\chapter{Anhang Elekronische Last}
+%V 7331G Profilkühlkörper (mindestens)\\
+%40mm-Lüfter mit Steuerung dazu\\
+%Lastkreis galvanisch getrennt!
+%
+%max. 5A
+%
+%100mOhm Shunt, 0,7V Ube = 1,2V\\
+%5V auf 1,2V:\\
+%Spannungsteiler 10k - (3k0 + 160)\\
+%Teilungsverhältnis 10:3,16
+%
+%100mOhm Shunt, 1,5V Ube = 2V\\
+%5V auf 2V:\\
+%Spannungsteiler 12k - (1k2 + 6k8)\\
+%Teilungsverhältnis 10:8
+
+% --------------------------------------------------------------------
+\end{document}
