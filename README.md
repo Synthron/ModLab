@@ -18,6 +18,10 @@ But now It will be bigger, better and way too complicated.
 ## Repo
 
 - [X] Rewrite documentation in english
+  - [ ] Write better introduction
+  - [ ] explain what exactly the ModLab is
+  - [ ] update changes for TFT
+  - [ ] Explain TFT Protocol
 - [X] Cleanup Repo
 
 ---
