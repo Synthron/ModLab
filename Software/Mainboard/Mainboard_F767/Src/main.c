@@ -21,6 +21,7 @@
 #include "main.h"
 #include "can.h"
 #include "dac.h"
+#include "dma.h"
 #include "fatfs.h"
 #include "i2c.h"
 #include "rtc.h"
@@ -59,7 +60,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t buffer[64];
+char buffer[64];
 char out_buf[64];
 uint16_t counter;
 uint32_t tick_loop;
@@ -82,6 +83,7 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
+
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
@@ -129,6 +131,8 @@ int main(void)
   MX_SPI4_Init();
   MX_TIM1_Init();
   MX_USB_DEVICE_Init();
+  MX_DMA_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
   timer_init();
@@ -141,16 +145,13 @@ int main(void)
   CAN_Filter();
   HAL_CAN_Start(&hcan1);
   HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
-  __enable_irq();
 
-  LCD_Init();
-  LCD_Rect_Fill(0, 0, 799, 479, BLUE);
-	LCD_Rect_Fill(10, 10, 788, 468, BLACK);
+  tft_init();
+  HAL_UART_Receive_IT(&huart1, RxBuffer, 1); // Get TFT Command
+  __enable_irq();
 	
 
 //https://controllerstech.com/can-protocol-in-stm32/
-
-
 
 
   HAL_Delay(2000);
@@ -166,15 +167,17 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    send_set16(ADDR_SymPSU, V_POS_SET, counter*100);
+    //send_set16(ADDR_SymPSU, V_POS_SET, counter*100);
 
-    HAL_Delay(500);
+    //HAL_Delay(500);
 
-    send_set16(ADDR_SymPSU, I_POS_SET, 500);
+    //send_set16(ADDR_SymPSU, I_POS_SET, 500);
 
-    HAL_Delay(500);
+    //HAL_Delay(500);
 
-    send_cmd(ADDR_SymPSU, CMD_ENOUT);
+    //send_cmd(ADDR_SymPSU, CMD_ENOUT);
+
+
 
     HAL_Delay(500);
 
@@ -237,10 +240,12 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_UART7
-                              |RCC_PERIPHCLK_I2C1|RCC_PERIPHCLK_I2C2
-                              |RCC_PERIPHCLK_SDMMC1|RCC_PERIPHCLK_CLK48;
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_USART1
+                              |RCC_PERIPHCLK_UART7|RCC_PERIPHCLK_I2C1
+                              |RCC_PERIPHCLK_I2C2|RCC_PERIPHCLK_SDMMC1
+                              |RCC_PERIPHCLK_CLK48;
   PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
+  PeriphClkInitStruct.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
   PeriphClkInitStruct.Uart7ClockSelection = RCC_UART7CLKSOURCE_PCLK1;
   PeriphClkInitStruct.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
   PeriphClkInitStruct.I2c2ClockSelection = RCC_I2C2CLKSOURCE_PCLK1;
@@ -253,6 +258,17 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+
+  /**
+   * TFT Interrupt Functions
+  */
+  tft_parse();
+
+
+}
 
 void transmit(void)
 {

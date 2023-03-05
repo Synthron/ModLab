@@ -80,11 +80,7 @@ void Error_Handler(void);
 #define CS_4_GPIO_Port GPIOB
 #define GPIO_0_Pin GPIO_PIN_12
 #define GPIO_0_GPIO_Port GPIOB
-#define Touch_CS_Pin GPIO_PIN_14
-#define Touch_CS_GPIO_Port GPIOB
-#define Touch_IRQ_Pin GPIO_PIN_15
-#define Touch_IRQ_GPIO_Port GPIOB
-#define LED_CAN_Pin GPIO_PIN_13
+#define LED_CAN_Pin GPIO_PIN_6
 #define LED_CAN_GPIO_Port GPIOG
 #define LED_485_Pin GPIO_PIN_7
 #define LED_485_GPIO_Port GPIOG
@@ -106,7 +102,7 @@ void Error_Handler(void);
 #define LED_I2C2_GPIO_Port GPIOG
 #define LED_ESP_Pin GPIO_PIN_12
 #define LED_ESP_GPIO_Port GPIOG
-#define LED_SD_Pin GPIO_PIN_6
+#define LED_SD_Pin GPIO_PIN_13
 #define LED_SD_GPIO_Port GPIOG
 #define LED_SPI3_Pin GPIO_PIN_14
 #define LED_SPI3_GPIO_Port GPIOG

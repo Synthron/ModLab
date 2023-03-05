@@ -2,6 +2,7 @@
     "files.associations": {
         "usb_device.h": "c",
         "usbd_core.h": "c",
-        "tim.h": "c"
+        "tim.h": "c",
+        "modlab.h": "c"
     }
 }
