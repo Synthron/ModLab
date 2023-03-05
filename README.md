@@ -54,6 +54,7 @@ But now It will be bigger, better and way too complicated.
   - [ ] Electronic Load
   - [ ] Logic Tester
   - [ ] Continuity tester
+  - [ ] Speaker Module
   - [x] Termination boards and Bus Extenders
     - [x] Review
     - [X] Ordered
@@ -72,7 +73,10 @@ But now It will be bigger, better and way too complicated.
   - [ ] STM32 code
     - [X] USB for Debug
     - [ ] LCD
-      - [ ] Get Help for SSD1963
+      - [ ] ~~Get Help for SSD1963~~
+      - [X] Get Nextion Display working
+        - [X] UI
+        - [X] µC Interface
     - [ ] Busses
       - [X] CAN
       - [ ] SPI
@@ -84,7 +88,7 @@ But now It will be bigger, better and way too complicated.
     - [X] OTA
     - [ ] basic web interface
 - Diode Tester code
-  - [ ] comm with Master (CAN or I2C)
+  - [ ] CAN
   - [ ] Testing Sequence
   - [X] ADC
 - SymPSU
