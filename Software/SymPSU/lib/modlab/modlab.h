@@ -34,6 +34,7 @@ extern "C" {
 
 //Command Defines
 #define CMD_RESET   0x01 //Reset Module
+#define CMD_PING    0x05 //Reset Module
 #define CMD_SET8    0x10 //Set 8bit
 #define CMD_GET8    0x11 //Get 8bit
 #define CMD_SET16   0x14 //Set 16bit

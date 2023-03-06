@@ -136,7 +136,7 @@ int main(void)
   HAL_CAN_Start(&hcan);
 
   //get address
-  address = ADDR_SymPSU | (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4) << 1) | (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2));
+  address = ADDR_SymPSU | (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4)) | (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2) << 1);
 
   // calibrate AD convertor
   while (HAL_ADCEx_Calibration_Start(&hadc1) != HAL_OK);
@@ -226,7 +226,11 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
     Error_Handler();
   }
 
-  if (RxData[0] == CMD_SET16) // set 16bit
+  if(RxData[0] == CMD_PING)
+  {
+    send_rec(address, RxData[0], stat);
+  }
+  else if (RxData[0] == CMD_SET16) // set 16bit
   {
     switch (RxData[1])
     {
@@ -280,7 +284,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
   }
   else if (RxData[0] == CMD_ENOUT || RxData[0] == CMD_DISOUT) // set Output
   {
-    outputState = ~(RxData[0] & 0x01);
+    outputState = !(RxData[0] & 0x01);
     stat = 0;
     send_rec(address, RxData[0], stat);
   }

@@ -14,6 +14,67 @@ void delay_us(uint16_t us)
 
 // CAN PROTOCOL
 
+void can_parse(void)
+{
+  switch (RxData[0])
+  {
+  case 0x01: //Reset Module
+    rec_ack = RxData[1];
+    break;
+  case 0x05:
+    set_dev();
+    break;
+  case 0x10: //Set 8bit
+    rec_ack = RxData[1];
+    break;
+  case 0x11: //Get 8bit
+    rec_ack = RxData[1];
+    rec_8 = RxData[2];
+    break;
+  case 0x14: //Set 16bit
+    rec_ack = RxData[1];
+    break;
+  case 0x15: //get 16bit
+    rec_ack = RxData[1];
+    rec_16 = RxData[2] << 8 | RxData[3];
+    break;
+  case 0x20: //Get Status
+    rec_ack = RxData[1];
+    rec_8 = RxData[2];
+    break;
+  case 0x40: //Enable Output
+    rec_ack = RxData[1];
+    break;
+  case 0x41: //Disable Output
+    rec_ack = RxData[1];
+    break;
+  case 0x60: //Set Operation mode
+    rec_ack = RxData[1];
+    break;
+  case 0x61: //Get Operation Mode
+    rec_ack = RxData[1];
+    rec_8 = RxData[2];
+    break;
+
+  default:
+    rec_ack = 0xFF;
+    break;
+  }
+
+  send_ok = 1;
+
+  if(can_debug)
+  {
+    int buflen = sprintf(out_buf,"[can_r] 0x%03x ", (uint16_t)RxHeader.StdId);
+    for(uint8_t i = 0; i < RxHeader.DLC; i++)
+    {
+      buflen += sprintf(out_buf+buflen, "%02x ", RxData[i]);
+    }
+    sprintf(out_buf+buflen, "\n");
+    CDC_Transmit_FS((uint8_t *)out_buf, strlen(out_buf));
+  }
+}
+
 void send_cmd (uint16_t dev, uint8_t cmd)
 {
     #ifdef HBC
@@ -69,4 +130,72 @@ void send_set16 (uint16_t dev, uint8_t reg, uint16_t val)
     TxData[2] = val >> 8;
     TxData[3] = (uint8_t)(val & 0x00FF);
     transmit();
+}
+
+void scan_dev(void)
+{
+    //scan Diode Tester
+    for(uint8_t i = 0; i < 4; i++)
+    {
+        send_cmd(0x20+i, CMD_PING);
+    }
+    //scan SymPSU
+    for(uint8_t i = 0; i < 4; i++)
+    {
+        send_cmd(0x30+i, CMD_PING);
+    }
+    //scan SMPS Tester
+    for(uint8_t i = 0; i < 4; i++)
+    {
+        send_cmd(0x3C+i, CMD_PING);
+    }
+    //scan F-Gen
+    for(uint8_t i = 0; i < 4; i++)
+    {
+        send_cmd(0x40+i, CMD_PING);
+    }
+}
+
+void set_dev(void)
+{
+  uint8_t devid_root = RxHeader.StdId & 0x0FC;
+  uint8_t devid_sub = RxHeader.StdId & 0x003;
+  switch (devid_root)
+  {
+    case 0x20:
+      dev_diode |= 1 << devid_sub;
+      break;
+    case 0x30:
+      dev_sympsu |= 1 << devid_sub;
+      break;
+    case 0x3C:
+      dev_smps |= 1 << devid_sub;
+      break;
+    case 0x40:
+      dev_fgen |= 1 << devid_sub;
+      break;
+  }
+}
+
+void transmit(void)
+{
+  send_ok = 0;
+  #ifdef HBC
+  if(can_debug)
+  {
+    int buflen = sprintf(out_buf,"[can_s] 0x%03x ", (uint16_t)TxHeader.StdId);
+    for(uint8_t i = 0; i < TxHeader.DLC; i++)
+    {
+      buflen += sprintf(out_buf+buflen, "%02x ", TxData[i]);
+    }
+    sprintf(out_buf+buflen, "\n");
+    CDC_Transmit_FS((uint8_t *)out_buf, strlen(out_buf));
+  }
+  #endif
+  HAL_GPIO_WritePin(LED_CAN_GPIO_Port, LED_CAN_Pin, 1);
+  HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox);
+  uint32_t temp = HAL_GetTick();
+  while(!send_ok && (HAL_GetTick() - temp < 2));
+  HAL_GPIO_WritePin(LED_CAN_GPIO_Port, LED_CAN_Pin, 0);
+
 }

@@ -81,7 +81,7 @@ Overview:
         \hline
         \textbf{Value}   &   \multicolumn{1}{|c|}{\textbf{Command}}\\ \hline \hline \hline
         01h    &   Reset Module \\ \hline
-
+        05h    &   Ping / Discovery \\ \hline
         \hline
         10h    &   Set 8bit Parameter    \\ \hline
         11h    &   Get 8bit Parameter     \\ \hline
@@ -98,6 +98,58 @@ Overview:
     \end{tabular}
     \caption{CAN-Commands}
 \label{tab:CAN-Commands}
+\end{table}
+
+%-------------------------------
+\subsubsection{01h --- Reset Module}
+Force Reset of Module. 
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        01h   &  1 Byte & Reset Module Command \\ \hline
+    \end{tabular}
+\label{tab:CAN-01-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        01h   &  1 Byte & Reset Module Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status in case of NACK \\ Otherwise set to 0\\see Error Descriptions}\\ \hline
+    \end{tabular}
+\label{tab:CAN-01-R}
+\end{table}
+
+%-------------------------------
+\subsubsection{05h --- Ping / Discovery}
+Ping Module to just get an answer. 
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        05h   &  1 Byte & Ping Command \\ \hline
+    \end{tabular}
+\label{tab:CAN-05-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        05h   &  1 Byte & Ping Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status in case of NACK \\ Otherwise set to 0\\see Error Descriptions}\\ \hline
+    \end{tabular}
+\label{tab:CAN-05-R}
 \end{table}
 
 %-------------------------------

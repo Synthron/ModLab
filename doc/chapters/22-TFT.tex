@@ -1,0 +1,114 @@
+\section{TFT Display}
+The Communication Interface with the TFT display is a 5V TTL UART with 250.000 baud of standard 8N1 protocol.
+
+\subsection{HBC to TFT}
+For sending commands or instructions to the TFT display, everything needs to be in ASCII followed by 3 Bytes of 0xFF. 
+
+Nearly all commands directly set properties of the elements placed on screen. For example setting the value of a floating point number (here: Element name x1) with two decimal places to the value ``3.30'' would be as follows:
+
+``\textcolor{orange}{x1.val=330}''
+
+Note, that no decimal point is set. The display can only handle integer numbers. Decimal points are handled by the corresponding number box element on screen. 
+
+Here is an overview of the most important commands for Interfacing. All examples are made with textbox t1 and float number x1.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Command}  & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        t1.txt=``foo'' & set text \\ \hline
+        t1.aph=127 & set opacity to fully visible \\ \hline
+        x1.val=330 & set numeric value \\ \hline
+        vis t1,0 & set textbox invisible. a 1 at the end makes it visible again \\ \hline
+    \end{tabular}
+\label{tab:tft_overview}
+\end{table}
+
+\subsection{Change Device Page}
+So far, every module class has its own page on the display. So only these modules need to be actively monitored. 
+
+If the user changes the page, the following command will be sentby the TFT: 
+
+``\textcolor{orange}{0x55 0x\#\#}''where \#\# is the following number:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Number}  & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        00h & Home Screen / General Settings\\ \hline
+        01h & Diode Tester \\ \hline
+        02h & Function Generator \\ \hline
+        03h & Symmetrical Power Supply \\ \hline
+        04h & Switching Mode Power Supply \\ \hline
+    \end{tabular}
+\label{tab:tft_pagecmd}
+\end{table}
+
+\subsection{Set Input Process Data}
+Depending on the module, this command can have a variable length of data trailing it. The general instruction across all modules begins with ``\textcolor{orange}{0x5C}''.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{length}  & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        1 byte & Module ID\\ \hline
+        1 byte & Operation mode \\ \hline
+        1 byte & Start Current Index \\ \hline
+        1 Byte & Stop Current Index \\ \hline
+    \end{tabular}
+\caption[Data Structure Diode Tester]{Data Structure Diode Tester}
+\label{tab:tft_diode_5C}
+
+\end{table}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{length}  & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        1 byte & Module ID\\ \hline
+        4 byte & Frequency - LSB first \\ \hline
+        2 byte & Amplitude - LSB first \\ \hline
+        2 byte & Offset - LSB first \\ \hline
+    \end{tabular}
+\caption[Data Structure Function Generator]{Data Structure Function Generator}
+\label{tab:tft_fgen_5C}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{length}  & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        1 byte & Module ID\\ \hline
+        2 byte & Positive Voltage - LSB first \\ \hline
+        2 byte & Positive Current - LSB first \\ \hline
+        2 byte & Negative Voltage - LSB first \\ \hline
+        2 byte & Negative Current - LSB first \\ \hline
+    \end{tabular}
+\caption[Data Structure Symmetric Power Supply]{Data Structure Symmetric Power Supply}
+\label{tab:tft_sympsu_5C}
+\end{table}
+
+\subsection{Set Output}
+The Set Output instruction only exists for modules that actually have a disconnectable output. The command generally follows the format ``\textcolor{orange}{0x50 0xIS}'', where I is the module sub-ID (numbered 1-4) and S is the state of the output (0 = off, 1 = on). 
+
+\subsection{General Settings (Home Screen)}
+General settings are mostly for debug purposes, but can be activated and deactivated on the home screen. The instruction begins with ``\textcolor{orange}{0x5A}'' and is followed by the data below:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Data}  & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        10h & Disable CAN-Log over USB \\ \hline
+        11h & Enable CAN-Log over USB \\ \hline
+        20h & Disable TFT-Log over USB \\ \hline
+        21h & Enable TFT-Log over USB \\ \hline
+        30h & Don't simulate missing modules \\ \hline
+        31h & Simulate all missing modules \\ \hline
+    \end{tabular}
+\label{tab:tft_5A}
+\end{table}

@@ -137,9 +137,12 @@ With 2MB of Flash and 512kB RAM it has more than plenty of storage both for the 
 Also it has a lot of interfaces which are used on the PCB. Additionally to the interfaces mentioned in chapter 5.4, internally the module has two SPI busses, one for the touch controller and one for the ESP32 coprocessor. A USB interface for debugging and monitoring is inlcuded as well. 
 
 For logging and config storage I included an SD card slot. 
-The FSMC (Flexible SRAM Memory Controller) interface of the microcontroller is connected to the 5'' LCD as well as an external 512k x 16 SRAM chip. I thought about including an external flash memory for application software, but decided against it, since the internal flash seemed more than enough. The external SRAM might come in handy tho if I decide to build modules like logic analyzers which have a ton of data coming in at once. 
+
+The FSMC (Flexible SRAM Memory Controller) interface of the microcontroller is connected to an external 512k x 16 SRAM chip. I thought about including an external flash memory for application software, but decided against it, since the internal flash seemed more than enough. The external SRAM might come in handy tho if I decide to build modules like logic analyzers which have a ton of data coming in at once. 
 
 The ESP32 module will provide a webinterface for monitoring and diagnosis, but not for controlling the system. This decision was made from a security stand point. 
+
+For Interfacing with the whole system, a 5" Nextion TFT LCD is connected via UART. 
 
 How the protocols on the interfaces will look like, will be discussed in another chapter. 
 
@@ -199,7 +202,7 @@ The module also has an STM32F103 controller on board which is connected to the b
 \label{tab:Par-Diode}
 \end{table}
 \subsection{Operation Modes}
-Start Measurement with "Enable Output" Command.
+Start Measurement with ``Enable Output'' Command.
 
 \begin{table}[H]
     \centering
@@ -212,7 +215,7 @@ Start Measurement with "Enable Output" Command.
 		3   &  \makecell[l]{Fine Characteristic Curve \\ Starting Current to Ending Current \\ Every possible current}\\ \hline
     \end{tabular}
 	\caption{Diode Tester Parameter List}
-\label{tab:Par-Diode}
+\label{tab:Modes-Diode}
 \end{table}
 \subsection{Channels/Outputs}
 Enabled Channels:

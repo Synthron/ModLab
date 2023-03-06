@@ -1,4 +1,4 @@
-\babel@toc {nil}{}
+\babel@toc {nil}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -16,3 +16,7 @@
 \contentsline {table}{\numberline {7.1}{\ignorespaces CAN-Messages}}{22}{table.70}%
 \contentsline {table}{\numberline {7.2}{\ignorespaces CAN Addresses}}{22}{table.73}%
 \contentsline {table}{\numberline {7.3}{\ignorespaces CAN-Commands}}{23}{table.75}%
+\contentsline {table}{\numberline {7.4}{\ignorespaces Data Structure Diode Tester}}{29}{table.93}%
+\contentsline {table}{\numberline {7.5}{\ignorespaces Data Structure Function Generator}}{29}{table.94}%
+\contentsline {table}{\numberline {7.6}{\ignorespaces Data Structure Symmetric Power Supply}}{29}{table.95}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

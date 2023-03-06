@@ -60,21 +60,13 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-char buffer[64];
-char out_buf[64];
+
 uint16_t counter;
 uint32_t tick_loop;
 
 uint8_t address = 0;
 
-CAN_RxHeaderTypeDef RxHeader;
-uint8_t RxData[8];
-uint8_t send_ok = 0;
 
-uint8_t can_monitor = 1;
-uint8_t can_ack = 0;
-uint8_t rec_ack, rec_nack, rec_8;
-uint16_t rec_16;
 
 /* USER CODE END PV */
 
@@ -149,12 +141,16 @@ int main(void)
   tft_init();
   HAL_UART_Receive_IT(&huart1, RxBuffer, 1); // Get TFT Command
   __enable_irq();
-	
+
+
+  HAL_Delay(500);
+	scan_dev();
 
 //https://controllerstech.com/can-protocol-in-stm32/
 
-
-  HAL_Delay(2000);
+  HAL_Delay(500);
+  tft_reset();
+ 
 
 
   tick_loop = HAL_GetTick();
@@ -164,28 +160,31 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-    //send_set16(ADDR_SymPSU, V_POS_SET, counter*100);
-
-    //HAL_Delay(500);
-
-    //send_set16(ADDR_SymPSU, I_POS_SET, 500);
-
-    //HAL_Delay(500);
-
-    //send_cmd(ADDR_SymPSU, CMD_ENOUT);
-
-
-
-    HAL_Delay(500);
-
-    counter++;
-    if(counter > 10)
-      counter = 0;
+    if((tft_cmd == CMD_PAGESET) && (setdata == 1))
+    {
+      enableblock = 1;
+      setdata = 0;
+    }
     
-    HAL_GPIO_TogglePin(LED_CAN_GPIO_Port, LED_CAN_Pin);
+    switch (tft_page)
+    {
+    case PAGE_MAIN:
+      main_page_loop();
+      break;
+    case PAGE_DTEST:
+      diode_page_loop();
+      break;
+    case PAGE_FGEN:
+      /* code */
+      break;
+    case PAGE_SYMPSU:
+      sympsu_page_loop();
+      break;
+    case PAGE_SMPS:
+      /* code */
+      break;
+    }
+    
   }
   /* USER CODE END 3 */
 }
@@ -270,27 +269,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 }
 
-void transmit(void)
-{
-  send_ok = 0;
-  #ifdef HBC
-  if(can_monitor)
-  {
-    int buflen = sprintf(out_buf,"[s] 0x%03x ", (uint16_t)TxHeader.StdId);
-    for(uint8_t i = 0; i < TxHeader.DLC; i++)
-    {
-      buflen += sprintf(out_buf+buflen, "%02x ", TxData[i]);
-    }
-    sprintf(out_buf+buflen, "\n");
-    CDC_Transmit_FS((uint8_t *)out_buf, strlen(out_buf));
-  }
-  #endif
-  
-  HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox);
-  uint32_t temp = HAL_GetTick();
-  while(!send_ok && (HAL_GetTick() - temp < 1000));
 
-}
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
@@ -298,61 +277,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
   {
     Error_Handler();
   }
-  switch (RxData[0])
-  {
-  case 0x01: //Reset Module
-    rec_ack = RxData[1];
-    break;
-  case 0x10: //Set 8bit
-    rec_ack = RxData[1];
-    break;
-  case 0x11: //Get 8bit
-    rec_ack = RxData[1];
-    rec_8 = RxData[2];
-    break;
-  case 0x14: //Set 16bit
-    rec_ack = RxData[1];
-    break;
-  case 0x15: //get 16bit
-    rec_ack = RxData[1];
-    rec_8 = RxData[2] << 8 | RxData[3];
-    break;
-  case 0x20: //Get Status
-    rec_ack = RxData[1];
-    rec_8 = RxData[2];
-    break;
-  case 0x40: //Enable Output
-    rec_ack = RxData[1];
-    break;
-  case 0x41: //Disable Output
-    rec_ack = RxData[1];
-    break;
-  case 0x60: //Set Operation mode
-    rec_ack = RxData[1];
-    break;
-  case 0x61: //Get Operation Mode
-    rec_ack = RxData[1];
-    rec_8 = RxData[2];
-    break;
-
-  default:
-    rec_ack = 0xFF;
-    break;
-  }
-
-
-  if(can_monitor)
-  {
-    int buflen = sprintf(out_buf,"[r] 0x%03x ", (uint16_t)RxHeader.StdId);
-    for(uint8_t i = 0; i < RxHeader.DLC; i++)
-    {
-      buflen += sprintf(out_buf+buflen, "%02x ", RxData[i]);
-    }
-    sprintf(out_buf+buflen, "\n");
-    CDC_Transmit_FS((uint8_t *)out_buf, strlen(out_buf));
-  }
   
-  send_ok = 1;
+  can_parse();
 }
 
 void CAN_Filter (void)
@@ -372,16 +298,6 @@ void CAN_Filter (void)
   canfilterconfig.SlaveStartFilterBank = 1; 
 
   HAL_CAN_ConfigFilter(&hcan1, &canfilterconfig);
-}
-
-void USB_Mon(void)
-{
-
-  sprintf(out_buf,"USB-Receive Test\r\n");
-  CDC_Transmit_FS((uint8_t *)buffer, strlen((const char*)buffer));
-
-  buffer[0] = 0xff;
-
 }
 
 void LEDs_Off(void)

@@ -11,6 +11,8 @@
 
 #include "usart.h"
 #include <stdio.h>
+#include "modlab.h"
+#include <string.h>
 
 #define PAGE_MAIN   0
 #define PAGE_DTEST  1
@@ -21,20 +23,30 @@
 #define CMD_PAGESET 0x55
 #define CMD_SETDATA 0x5C
 #define CMD_SETOUT  0x50
+#define CMD_DEBUG   0x5A
 
 //general function prototypes
 void tft_init (void);
 void tft_parse (void);
 void tft_send (char commandstring[60], uint8_t len);
+void main_page_loop(void);
+void tft_reset(void);
 
 //diode tester function prototypes
+void enable_diode(uint8_t ch);
+void disable_diode(uint8_t ch);
+void diode_page_loop(void);
 
 //fgen function prototypes
 void enable_fgen(uint8_t ch);
+void disable_fgen(uint8_t ch);
 
 //sympsu function prototypes
-void enable_smps(uint8_t ch);
-
+void enable_sympsu(uint8_t ch);
+void disable_sympsu(uint8_t ch);
+void sympsu_page_loop (void);
+void sympsu_get_data(uint8_t ch);
+void sympsu_set_data(uint8_t ch);
 //smps function prototypes
 
 //general variables
@@ -47,6 +59,19 @@ uint8_t module;
 uint8_t outstate;
 uint8_t setdata; // Indicator for data received
 uint8_t setout;  // indicator for Output to set
+uint8_t setdebug; // indicator for debug settings
+uint8_t loopblock;
+uint8_t enableblock;
+uint32_t pagetimer;
+
+uint8_t can_debug;
+uint8_t tft_debug;
+uint8_t sim_debug;
+
+uint8_t dev_diode;
+uint8_t dev_fgen;
+uint8_t dev_sympsu;
+uint8_t dev_smps;
 
 //Diode Tester Variables
 uint8_t start_index;

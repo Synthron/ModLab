@@ -13,8 +13,9 @@
 extern "C" {
 #endif
 
-#include "main.h"
 #include "tim.h"
+#include "tft.h"
+#include "can.h"
 
 //Device Defines
 #define ADDR_HBC 0x10
@@ -29,6 +30,7 @@ extern "C" {
 
 //Command Defines
 #define CMD_RESET   0x01 //Reset Module
+#define CMD_PING    0x05 //Ping/Discovery-Mode
 #define CMD_SET8    0x10 //Set 8bit
 #define CMD_GET8    0x11 //Get 8bit
 #define CMD_SET16   0x14 //Set 16bit
@@ -57,10 +59,7 @@ extern "C" {
 #define MA37        0x1E
 #define START_CURR  0x20
 #define END_CURR    0x10
-#define MODE_SINGLE 0
-#define MODE_COARSE 1
-#define MODE_MEDIUM 2
-#define MODE_FINE   3
+#define OPMODE      0x30
 
 //SymPSU Params
 #define V_POS_SET 0x10
@@ -75,14 +74,27 @@ extern "C" {
 CAN_TxHeaderTypeDef TxHeader;
 uint8_t TxData[8];
 uint32_t TxMailbox;
+CAN_RxHeaderTypeDef RxHeader;
+uint8_t RxData[8];
+uint8_t send_ok;
+
+uint8_t can_ack;
+uint8_t rec_ack, rec_nack, rec_8;
+uint16_t rec_16;
+char buffer[64];
+char out_buf[64];
 
 void timer_init();
 void delay_us(uint16_t us);
 
+void can_parse(void);
 void send_cmd (uint16_t dev, uint8_t cmd);
 void send_get (uint16_t dev, uint8_t cmd, uint8_t reg);
 void send_set8 (uint16_t dev, uint8_t reg, uint8_t val);
 void send_set16 (uint16_t dev, uint8_t reg, uint16_t val);
+void scan_dev(void);
+void set_dev(void);
+void transmit(void);
 
 
 #ifdef __cplusplus

@@ -114,9 +114,6 @@ void Error_Handler(void);
 #define HBC
 
 void LEDs_Off(void);
-void USB_Mon(void);
-void PrepTelegram(uint8_t dat[], uint8_t len);
-void transmit(void);
 void CAN_Filter(void);
 
 /* USER CODE END Private defines */

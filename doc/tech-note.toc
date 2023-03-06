@@ -1,4 +1,4 @@
-\babel@toc {nil}{}
+\babel@toc {nil}{}\relax 
 \contentsline {chapter}{\numberline {I}List of Tables}{II}{chapter.2}%
 \contentsline {chapter}{\numberline {II}List of Figures}{III}{chapter.3}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.4}%
@@ -60,21 +60,30 @@
 \contentsline {subsection}{\numberline {7.2.4}Auto-Messages}{22}{subsection.71}%
 \contentsline {subsection}{\numberline {7.2.5}Base-Addresses}{22}{subsection.72}%
 \contentsline {subsection}{\numberline {7.2.6}Commands}{23}{subsection.74}%
-\contentsline {subsubsection}{\numberline {7.2.6.1}10h --- Set 8bit Parameter}{23}{subsubsection.76}%
-\contentsline {subsubsection}{\numberline {7.2.6.2}11h --- Get 8bit Parameter}{23}{subsubsection.77}%
-\contentsline {subsubsection}{\numberline {7.2.6.3}14h --- Set 16bit Parameter}{24}{subsubsection.78}%
-\contentsline {subsubsection}{\numberline {7.2.6.4}15h --- Get 16bit Parameter}{24}{subsubsection.79}%
-\contentsline {subsubsection}{\numberline {7.2.6.5}20h --- Get Status Information}{24}{subsubsection.80}%
-\contentsline {subsubsection}{\numberline {7.2.6.6}40h --- Enable Output}{25}{subsubsection.81}%
-\contentsline {subsubsection}{\numberline {7.2.6.7}41h --- Disable Output}{25}{subsubsection.82}%
-\contentsline {subsubsection}{\numberline {7.2.6.8}60h --- Set Operation Mode}{25}{subsubsection.83}%
-\contentsline {subsubsection}{\numberline {7.2.6.9}61h --- Get Operation Mode}{26}{subsubsection.84}%
-\contentsline {subsection}{\numberline {7.2.7}Error Descriptions}{26}{subsection.85}%
-\contentsline {subsubsection}{\numberline {7.2.7.1}Status Byte}{26}{subsubsection.86}%
-\contentsline {section}{\numberline {7.3}ESP SPI}{27}{section.87}%
-\contentsline {section}{\numberline {7.4}Backplane SPI}{27}{section.88}%
-\contentsline {subsection}{\numberline {7.4.1}5V SPI}{27}{subsection.89}%
-\contentsline {subsection}{\numberline {7.4.2}3V3 SPI}{27}{subsection.90}%
-\contentsline {section}{\numberline {7.5}I2C}{27}{section.91}%
-\contentsline {subsection}{\numberline {7.5.1}Standard Mode}{27}{subsection.92}%
-\contentsline {subsection}{\numberline {7.5.2}Fast Mode}{27}{subsection.93}%
+\contentsline {subsubsection}{\numberline {7.2.6.1}01h --- Reset Module}{23}{subsubsection.76}%
+\contentsline {subsubsection}{\numberline {7.2.6.2}05h --- Ping / Discovery}{23}{subsubsection.77}%
+\contentsline {subsubsection}{\numberline {7.2.6.3}10h --- Set 8bit Parameter}{24}{subsubsection.78}%
+\contentsline {subsubsection}{\numberline {7.2.6.4}11h --- Get 8bit Parameter}{24}{subsubsection.79}%
+\contentsline {subsubsection}{\numberline {7.2.6.5}14h --- Set 16bit Parameter}{24}{subsubsection.80}%
+\contentsline {subsubsection}{\numberline {7.2.6.6}15h --- Get 16bit Parameter}{25}{subsubsection.81}%
+\contentsline {subsubsection}{\numberline {7.2.6.7}20h --- Get Status Information}{25}{subsubsection.82}%
+\contentsline {subsubsection}{\numberline {7.2.6.8}40h --- Enable Output}{26}{subsubsection.83}%
+\contentsline {subsubsection}{\numberline {7.2.6.9}41h --- Disable Output}{26}{subsubsection.84}%
+\contentsline {subsubsection}{\numberline {7.2.6.10}60h --- Set Operation Mode}{26}{subsubsection.85}%
+\contentsline {subsubsection}{\numberline {7.2.6.11}61h --- Get Operation Mode}{27}{subsubsection.86}%
+\contentsline {subsection}{\numberline {7.2.7}Error Descriptions}{27}{subsection.87}%
+\contentsline {subsubsection}{\numberline {7.2.7.1}Status Byte}{27}{subsubsection.88}%
+\contentsline {section}{\numberline {7.3}TFT Display}{28}{section.89}%
+\contentsline {subsection}{\numberline {7.3.1}HBC to TFT}{28}{subsection.90}%
+\contentsline {subsection}{\numberline {7.3.2}Change Device Page}{28}{subsection.91}%
+\contentsline {subsection}{\numberline {7.3.3}Set Input Process Data}{28}{subsection.92}%
+\contentsline {subsection}{\numberline {7.3.4}Set Output}{29}{subsection.96}%
+\contentsline {subsection}{\numberline {7.3.5}General Settings (Home Screen)}{29}{subsection.97}%
+\contentsline {section}{\numberline {7.4}ESP SPI}{30}{section.98}%
+\contentsline {section}{\numberline {7.5}Backplane SPI}{30}{section.99}%
+\contentsline {subsection}{\numberline {7.5.1}5V SPI}{30}{subsection.100}%
+\contentsline {subsection}{\numberline {7.5.2}3V3 SPI}{30}{subsection.101}%
+\contentsline {section}{\numberline {7.6}I2C}{30}{section.102}%
+\contentsline {subsection}{\numberline {7.6.1}Standard Mode}{30}{subsection.103}%
+\contentsline {subsection}{\numberline {7.6.2}Fast Mode}{30}{subsection.104}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
