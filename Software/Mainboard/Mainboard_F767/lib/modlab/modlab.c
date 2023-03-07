@@ -183,6 +183,7 @@ void transmit(void)
   #ifdef HBC
   if(can_debug)
   {
+    HAL_GPIO_WritePin(LED_USB_Port, LED_USB, 1);
     int buflen = sprintf(out_buf,"[can_s] 0x%03x ", (uint16_t)TxHeader.StdId);
     for(uint8_t i = 0; i < TxHeader.DLC; i++)
     {
@@ -190,12 +191,13 @@ void transmit(void)
     }
     sprintf(out_buf+buflen, "\n");
     CDC_Transmit_FS((uint8_t *)out_buf, strlen(out_buf));
+    HAL_GPIO_WritePin(LED_USB_Port, LED_USB, 0);
   }
   #endif
-  HAL_GPIO_WritePin(LED_CAN_GPIO_Port, LED_CAN_Pin, 1);
+  HAL_GPIO_WritePin(LED_CAN_Port, LED_CAN, 1);
   HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox);
   uint32_t temp = HAL_GetTick();
   while(!send_ok && (HAL_GetTick() - temp < 2));
-  HAL_GPIO_WritePin(LED_CAN_GPIO_Port, LED_CAN_Pin, 0);
+  HAL_GPIO_WritePin(LED_CAN_Port, LED_CAN, 0);
 
 }

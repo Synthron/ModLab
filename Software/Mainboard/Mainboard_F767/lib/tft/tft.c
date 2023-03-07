@@ -11,6 +11,7 @@ void tft_init(void)
   outstate = 0;
   setdata = 0; // Indicator for data received
   setout = 0;  // indicator for Output to set
+  readdata = 0;
   setdebug = 0;
 
   // Diode Tester Variables
@@ -26,9 +27,11 @@ void tft_init(void)
 
 void tft_parse(void)
 {
+  
   // get Command and look for further data
   if (!tft_data)
   {
+    HAL_GPIO_WritePin(LED_TFT_Port, LED_TFT, 1);
     tft_cmd = RxBuffer[0];
     tft_data = 1;
     if (tft_cmd == CMD_PAGESET)
@@ -58,10 +61,18 @@ void tft_parse(void)
     {
       HAL_UART_Receive_IT(&huart1, RxBuffer, 1);
     }
+    else if (tft_cmd == CMD_READDAT)
+    {
+      tft_data = 0;
+      readdata = 1;
+      HAL_UART_Receive_IT(&huart1, RxBuffer, 1);
+      HAL_GPIO_WritePin(LED_TFT_Port, LED_TFT, 0);
+    }
     else
     {
       tft_data = 0;
       HAL_UART_Receive_IT(&huart1, RxBuffer, 1);
+      HAL_GPIO_WritePin(LED_TFT_Port, LED_TFT, 0);
     }
   }
   // get Data to command
@@ -109,6 +120,7 @@ void tft_parse(void)
     else if (tft_cmd == CMD_DEBUG)
     {
       setdebug = RxBuffer[0];
+      setout = 1;
     }
 
     if (tft_debug)
@@ -123,20 +135,25 @@ void tft_parse(void)
       CDC_Transmit_FS((uint8_t *)usb_out, len);
     }
     HAL_UART_Receive_IT(&huart1, RxBuffer, 1);
+    HAL_GPIO_WritePin(LED_TFT_Port, LED_TFT, 0);
   }
 }
 
 void tft_send(char commandstring[60], uint8_t len)
 {
+  HAL_GPIO_WritePin(LED_TFT_Port, LED_TFT, 1);
   uint8_t CmdEnd[3] = {0xff, 0xff, 0xff};
   HAL_UART_Transmit(&huart1, (uint8_t *)commandstring, len, 1);
   HAL_UART_Transmit(&huart1, CmdEnd, 3, 1);
   if (tft_debug)
   {
+    HAL_GPIO_WritePin(LED_USB_Port, LED_USB, 1);
     char usb_out[50];
     len = sprintf(usb_out, "[tft_s] %s\n", commandstring);
     CDC_Transmit_FS((uint8_t *)usb_out, len);
+    HAL_GPIO_WritePin(LED_USB_Port, LED_USB, 0);
   }
+  HAL_GPIO_WritePin(LED_TFT_Port, LED_TFT, 0);
 }
 
 void tft_reset(void)
@@ -153,7 +170,7 @@ void main_page_loop(void)
 {
   if (setdebug != 0)
   {
-    uint8_t mode = setdebug & 0xF0;
+    uint8_t mode = (setdebug & 0xF0) >> 4;
     switch (mode)
     {
     case 1:
@@ -273,7 +290,8 @@ void diode_page_loop(void)
  * 	"vis t<47-50>,1" + ff ff ff zum deaktivieren
  *
  * Daten für Frequenz, Amplitude, Offset:
- * 0x5C <01-04> <LSB...MSB F> <LSB_MSB A> <LSB_MSB O>
+ * 0x5C <01-04> <LSB...MSB F
+deine Arbeit scheint aber grade ziemlich träge zu se> <LSB_MSB A> <LSB_MSB O>
  * INST  1 Byte    4 Byte       2 Byte      2 Byte
  *
  * Ausgang freischalten: 0x50 + <10/11> <20/21> <30/31> <40/41>
@@ -345,9 +363,8 @@ void sympsu_page_loop(void)
   }
 
   //periodically get voltage and current values
-  /*if((HAL_GetTick() - pagetimer) > 250)
+  if(readdata)
   {
-    pagetimer = HAL_GetTick();
     for(int j = 0; j < 4; j++)
     {
       if((dev_sympsu >> j) & 0x01)
@@ -355,7 +372,8 @@ void sympsu_page_loop(void)
         sympsu_get_data(j);
       }
     }
-  }*/
+    readdata = 0;
+  }
 
   //set values if received
   if(setdata)

@@ -20,8 +20,8 @@ But now It will be bigger, better and way too complicated.
 - [X] Rewrite documentation in english
   - [ ] Write better introduction
   - [ ] explain what exactly the ModLab is
-  - [ ] update changes for TFT
-  - [ ] Explain TFT Protocol
+  - [X] update changes for TFT
+  - [X] Explain TFT Protocol
 - [X] Cleanup Repo
 
 ---
@@ -76,7 +76,7 @@ But now It will be bigger, better and way too complicated.
 - Master Bus Controller
   - [ ] STM32 code
     - [X] USB for Debug
-    - [ ] LCD
+    - [X] LCD
       - [ ] ~~Get Help for SSD1963~~
       - [X] Get Nextion Display working
         - [X] UI

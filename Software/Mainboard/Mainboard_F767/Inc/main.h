@@ -113,6 +113,23 @@ void Error_Handler(void);
 /* USER CODE BEGIN Private defines */
 #define HBC
 
+#define LED_USB_Port GPIOG
+#define LED_USB GPIO_PIN_6
+#define LED_TFT_Port GPIOG
+#define LED_TFT GPIO_PIN_7
+#define LED_CAN_Port GPIOG
+#define LED_CAN GPIO_PIN_8
+#define LED_485_Port GPIOG
+#define LED_485 GPIO_PIN_10
+#define LED_I2C_Port GPIOG
+#define LED_I2C GPIO_PIN_14
+#define LED_SPI_Port GPIOG
+#define LED_SPI GPIO_PIN_15
+#define LED_ESP_Port GPIOG
+#define LED_ESP GPIO_PIN_12
+#define LED_SD_Port GPIOG
+#define LED_SD GPIO_PIN_13
+
 void LEDs_Off(void);
 void CAN_Filter(void);
 

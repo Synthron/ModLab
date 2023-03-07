@@ -24,6 +24,7 @@
 #define CMD_SETDATA 0x5C
 #define CMD_SETOUT  0x50
 #define CMD_DEBUG   0x5A
+#define CMD_READDAT 0x53
 
 //general function prototypes
 void tft_init (void);
@@ -60,6 +61,7 @@ uint8_t outstate;
 uint8_t setdata; // Indicator for data received
 uint8_t setout;  // indicator for Output to set
 uint8_t setdebug; // indicator for debug settings
+uint8_t readdata; // indicator to load cyclic data to TFT
 uint8_t loopblock;
 uint8_t enableblock;
 uint32_t pagetimer;
