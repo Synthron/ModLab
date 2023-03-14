@@ -56,6 +56,9 @@ But now It will be bigger, better and way too complicated.
     - [X] Assembled
   - [ ] DSO-138 clone?
   - [ ] Electronic Load
+    - [X] Review
+    - [X] Ordered
+    - [ ] Assembled
   - [ ] Logic Tester
   - [ ] Continuity tester
   - [ ] Speaker Module
@@ -83,10 +86,10 @@ But now It will be bigger, better and way too complicated.
         - [X] µC Interface
     - [ ] Busses
       - [X] CAN
-      - [ ] SPI
+      - [ ] SPI - No Usecase so far
       - [ ] I2C
-      - [ ] DAC
-      - [ ] RS485
+      - [ ] DAC - No Usecase so far
+      - [ ] RS485 - No Usecase so far
   - [ ] ESP32 code
     - [ ] comm with STM
     - [X] OTA
@@ -107,3 +110,7 @@ But now It will be bigger, better and way too complicated.
   - [ ] PWM Signals
   - [ ] AD9833
   - [ ] CAN-Interface
+- Power Monitor
+  - [ ] Voltage Measurement
+  - [ ] Current Measurement
+  - [ ] I2C communication

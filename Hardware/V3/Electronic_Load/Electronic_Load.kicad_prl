@@ -1,8 +1,8 @@
 {
   "board": {
-    "active_layer": 1,
+    "active_layer": 37,
     "active_layer_preset": "",
-    "auto_track_width": true,
+    "auto_track_width": false,
     "hidden_nets": [],
     "high_contrast_mode": 0,
     "net_color_mode": 1,
@@ -33,9 +33,9 @@
       3,
       4,
       5,
-      8,
       9,
       10,
+      12,
       13,
       14,
       15,
@@ -60,8 +60,8 @@
       35,
       36
     ],
-    "visible_layers": "ffcd3f4_ffffffff",
-    "zone_display_mode": 0
+    "visible_layers": "ff8d0f0_ffffffff",
+    "zone_display_mode": 1
   },
   "meta": {
     "filename": "Electronic_Load.kicad_prl",
