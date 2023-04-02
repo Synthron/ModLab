@@ -73,14 +73,12 @@ But now It will be bigger, better and way too complicated.
 
 - General
   - [X] Define CAN Protocol
-    - [ ] ~~Get ISO-TP working~~
     - [X] Define Command Structure
     - [X] Define Data Structure
 - Master Bus Controller
   - [ ] STM32 code
     - [X] USB for Debug
     - [X] LCD
-      - [ ] ~~Get Help for SSD1963~~
       - [X] Get Nextion Display working
         - [X] UI
         - [X] µC Interface
@@ -95,7 +93,7 @@ But now It will be bigger, better and way too complicated.
     - [X] OTA
     - [ ] basic web interface
 - Diode Tester code
-  - [ ] CAN
+  - [X] CAN
   - [ ] Testing Sequence
   - [X] ADC
 - SymPSU
