@@ -9,6 +9,10 @@ But now It will be bigger, better and way too complicated.
 
 ---
 
+You can also find this repository over on [GitHub](https://github.com/Synthron/ModLab)
+
+---
+
 **Work in Progress**
 
 ---
@@ -43,13 +47,27 @@ But now It will be bigger, better and way too complicated.
       - [X] Ordered
       - [X] Assembled
   - [X] Variable Power Supply
-    - [X] Review
-    - [X] Ordered
-    - [X] Assembled
+    - [X] V1
+      - [X] Review
+      - [X] Ordered
+      - [X] Assembled
+    - [ ] V2
+      - [ ] Fix Relais Footprint
+      - [ ] Feedback Dividers for correct level
+      - [ ] Review
+      - [ ] Ordered
+      - [ ] Assembled
   - [x] Symmetric Power Supply
-    - [X] Review
-    - [X] Ordered
-    - [X] Assembled
+    - [X] V1
+      - [X] Review
+      - [X] Ordered
+      - [X] Assembled
+    - [ ] V2
+      - [ ] fix negative channel
+      - [ ] fix CC LEDs
+      - [ ] Review
+      - [ ] Ordered
+      - [ ] Assembled
   - [x] Waveform generator
     - [x] Review
     - [X] Ordered
@@ -58,7 +76,7 @@ But now It will be bigger, better and way too complicated.
   - [ ] Electronic Load
     - [X] Review
     - [X] Ordered
-    - [ ] Assembled
+    - [X] Assembled
   - [ ] Logic Tester
   - [ ] Continuity tester
   - [ ] Speaker Module
@@ -94,16 +112,16 @@ But now It will be bigger, better and way too complicated.
     - [ ] basic web interface
 - Diode Tester code
   - [X] CAN
-  - [ ] Testing Sequence
+  - [X] Testing Sequence
   - [X] ADC
 - SymPSU
   - [X] PWM Signals
   - [X] ADC
   - [X] CAN-Interface
 - Power SMPS
-  - [ ] PWM Signals
-  - [ ] ADC
-  - [ ] CAN-Interface
+  - [X] PWM Signals
+  - [X] ADC
+  - [X] CAN-Interface
 - Waveform Generator
   - [ ] PWM Signals
   - [ ] AD9833
@@ -112,3 +130,13 @@ But now It will be bigger, better and way too complicated.
   - [ ] Voltage Measurement
   - [ ] Current Measurement
   - [ ] I2C communication
+
+---
+
+ModLab Lib Tracker:
+
+1. SymPSU
+2. Diode-Tester
+3. SMPS
+4. Load
+5. F-Gen
