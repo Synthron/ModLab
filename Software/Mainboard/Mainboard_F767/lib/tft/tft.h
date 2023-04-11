@@ -19,6 +19,7 @@
 #define PAGE_FGEN   2
 #define PAGE_SYMPSU 3
 #define PAGE_SMPS   4
+#define PAGE_LOAD   5
 
 #define CMD_PAGESET 0x55
 #define CMD_SETDATA 0x5C
@@ -48,7 +49,20 @@ void disable_sympsu(uint8_t ch);
 void sympsu_page_loop (void);
 void sympsu_get_data(uint8_t ch);
 void sympsu_set_data(uint8_t ch);
+
 //smps function prototypes
+void enable_smps(uint8_t ch);
+void disable_smps(uint8_t ch);
+void smps_page_loop(void);
+void smps_get_data(uint8_t ch);
+void smps_set_data(uint8_t ch);
+
+//load function prototypes
+void enable_load(uint8_t ch);
+void disable_load(uint8_t ch);
+void load_page_loop(void);
+void load_set_data(uint8_t ch);
+void load_get_data(uint8_t ch);
 
 //general variables
 uint8_t RxBuffer[30];
@@ -74,6 +88,7 @@ uint8_t dev_diode;
 uint8_t dev_fgen;
 uint8_t dev_sympsu;
 uint8_t dev_smps;
+uint8_t dev_load;
 
 //Diode Tester Variables
 uint8_t start_index;
@@ -99,7 +114,14 @@ uint16_t sympsu_ipos_get[4];
 uint16_t sympsu_ineg_get[4];
 
 //SMPS Variables
+uint16_t smps_v_set;
+uint16_t smps_i_set;
+uint16_t smps_v_get[4];
+uint16_t smps_i_get[4];
 
+//Load Variables
+uint16_t load_set_0;
+uint16_t load_set_1;
 
 #endif /* TFT_H */
 

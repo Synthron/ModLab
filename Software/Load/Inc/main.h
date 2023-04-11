@@ -65,7 +65,7 @@ void Error_Handler(void);
 #define ADDR1_Pin GPIO_PIN_5
 #define ADDR1_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
-
+#define LOAD
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

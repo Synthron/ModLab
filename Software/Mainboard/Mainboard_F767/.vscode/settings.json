@@ -3,6 +3,7 @@
         "usb_device.h": "c",
         "usbd_core.h": "c",
         "tim.h": "c",
-        "modlab.h": "c"
+        "modlab.h": "c",
+        "usart.h": "c"
     }
 }

@@ -8,9 +8,9 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "/media/marco/Daten/Repositories/modlab/Software/Diode_Tester/Inc",
-                "/media/marco/Daten/Repositories/modlab/Software/Diode_Tester/Src",
-                "/media/marco/Daten/Repositories/modlab/Software/Diode_Tester/lib/modlab",
+                "/media/marco/Daten/Repositories/modlab/Software/Load/Inc",
+                "/media/marco/Daten/Repositories/modlab/Software/Load/Src",
+                "/media/marco/Daten/Repositories/modlab/Software/Load/lib/modlab",
                 "/home/marco/.platformio/packages/framework-stm32cubef1/Drivers/CMSIS/Include",
                 "/home/marco/.platformio/packages/framework-stm32cubef1/Drivers/CMSIS/Device/ST/STM32F1xx/Include",
                 "/home/marco/.platformio/packages/framework-stm32cubef1/Drivers/STM32F1xx_HAL_Driver/Inc",
@@ -62,9 +62,9 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "/media/marco/Daten/Repositories/modlab/Software/Diode_Tester/Inc",
-                    "/media/marco/Daten/Repositories/modlab/Software/Diode_Tester/Src",
-                    "/media/marco/Daten/Repositories/modlab/Software/Diode_Tester/lib/modlab",
+                    "/media/marco/Daten/Repositories/modlab/Software/Load/Inc",
+                    "/media/marco/Daten/Repositories/modlab/Software/Load/Src",
+                    "/media/marco/Daten/Repositories/modlab/Software/Load/lib/modlab",
                     "/home/marco/.platformio/packages/framework-stm32cubef1/Drivers/CMSIS/Include",
                     "/home/marco/.platformio/packages/framework-stm32cubef1/Drivers/CMSIS/Device/ST/STM32F1xx/Include",
                     "/home/marco/.platformio/packages/framework-stm32cubef1/Drivers/STM32F1xx_HAL_Driver/Inc",

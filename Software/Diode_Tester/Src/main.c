@@ -22,11 +22,12 @@
 #include "adc.h"
 #include "can.h"
 #include "i2c.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "modlab.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -36,6 +37,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+#define ADC_OFFSET 20
+#define ADC_VOLT 420
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -46,7 +51,21 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint8_t address;
 
+uint8_t start_curr, end_curr, mode;
+uint8_t start = 0;
+uint16_t currents[15];
+
+uint32_t raw;
+
+// https://controllerstech.com/can-protocol-in-stm32/
+CAN_TxHeaderTypeDef TxHeader;
+CAN_RxHeaderTypeDef RxHeader;
+uint8_t TxData[8];
+uint32_t TxMailbox;
+uint8_t RxData[8];
+uint8_t stat = 0;
 
 uint32_t average;
 
@@ -55,6 +74,10 @@ uint32_t average;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+uint32_t measure_Diode (void);
+void CAN_Filter(uint8_t addr);
+void measure_sequence (void);
+void set_output (uint8_t val);
 
 /* USER CODE END PFP */
 
@@ -94,9 +117,30 @@ int main(void)
   MX_ADC1_Init();
   MX_CAN_Init();
   MX_I2C1_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  while(HAL_ADCEx_Calibration_Start(&hadc1) != HAL_OK);           // calibrate AD convertor
-  //ADC_recalibration();
+
+  //initialize us-timer
+  timer_init();
+
+
+  //Set outputs to 0
+  HAL_GPIO_WritePin(GPIOA, MA2_Pin, 0);
+  HAL_GPIO_WritePin(GPIOA, MA5_Pin, 0);
+  HAL_GPIO_WritePin(GPIOA, MA10_Pin, 0);
+  HAL_GPIO_WritePin(GPIOA, MA20_Pin, 0);
+
+  //initialize address
+  address = ADDR_DiodeTester | (HAL_GPIO_ReadPin(GPIOB, ADDR0_Pin)) | (HAL_GPIO_ReadPin(GPIOB, ADDR1_Pin) << 1);
+
+  //calibrate ADC
+  while(HAL_ADCEx_Calibration_Start(&hadc1) != HAL_OK);
+
+  //initialize CAN and enable Interrupt
+  HAL_CAN_Start(&hcan);
+  CAN_Filter(address);
+  HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
+  __enable_irq();
 
   /* USER CODE END 2 */
 
@@ -104,16 +148,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_Delay(5000);
-
-    for(uint8_t i = 0; i < 16; i++)
+    if(start)
     {
-      HAL_GPIO_WritePin(GPIOA, MA2_Pin, i & 0x01);
-      HAL_GPIO_WritePin(GPIOA, MA5_Pin, (i & 0x02) >> 1);
-      HAL_GPIO_WritePin(GPIOA, MA10_Pin, (i & 0x04) >> 2);
-      HAL_GPIO_WritePin(GPIOA, MA20_Pin, (i & 0x08) >> 3);
-      HAL_Delay(2000);
-    }
+      for(int i = 0; i < 15; i++)
+        currents[i] = 0;
+      start = 0;
+      measure_sequence();
+      send_cmd(ADDR_HBC & 0x0ff | ADDR_AUTO, AUTO_DONE);
+    }    
 
     
     /* USER CODE END WHILE */
@@ -170,23 +212,154 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+  if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  if (RxData[0] == CMD_PING)
+  {
+    send_rec(address, RxData[0], stat);
+  }
+  else if (RxData[0] == CMD_SET8) // set 8bit
+  {
+    switch (RxData[1])
+    {
+    case START_CURR:
+      start_curr = RxData[2];
+      stat = 0;
+      break;
+    case END_CURR:
+      end_curr = RxData[2];
+      stat = 0;
+      break;
+    default: // Index Mismatch
+      stat = 1;
+      break;
+    }
+    send_rec(address, RxData[0], stat);
+  }
+  else if (RxData[0] == CMD_GET16) // get 16bit
+  {
+    if(RxData[1] >= 0x10 && RxData[1] <= 0x1E)
+    {
+      stat = 0;
+      send_rec16(address, RxData[0], stat, currents[RxData[1] & 0x0F]);
+    }
+    else
+    {
+      stat = 1; //Index Mismatch
+      send_rec(address, RxData[0], stat);
+    }
+  }
+  else if (RxData[0] == CMD_SETMODE) // set operating mode
+  {
+    mode = RxData[1]-1;
+    stat = 0;
+    send_rec(address, RxData[0], stat);
+  }
+  else if (RxData[0] == CMD_ENOUT) // start conversion
+  {
+    start = 1;
+    stat = 0;
+    send_rec(address, RxData[0], stat);
+  }
+  else // Unknown Command
+  {
+    stat = 0x40;
+    send_rec(address, RxData[0], stat);
+  }
+}
+
+void CAN_Filter(uint8_t addr)
+{
+  CAN_FilterTypeDef canfilterconfig;
+
+  canfilterconfig.FilterActivation = CAN_FILTER_ENABLE;
+  canfilterconfig.FilterBank = 0; // which filter bank to use from the assigned ones
+  canfilterconfig.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+  canfilterconfig.FilterIdHigh = addr << 5;
+  canfilterconfig.FilterIdLow = 0;
+  canfilterconfig.FilterMaskIdHigh = 0x1FFF;
+  canfilterconfig.FilterMaskIdLow = 0xFFFF;
+  canfilterconfig.FilterMode = CAN_FILTERMODE_IDMASK;
+  canfilterconfig.FilterScale = CAN_FILTERSCALE_32BIT;
+  canfilterconfig.SlaveStartFilterBank = 1; // how many filters to assign to the CAN1 (master can)
+
+  HAL_CAN_ConfigFilter(&hcan, &canfilterconfig);
+}
+
+void measure_sequence (void)
+{
+  uint8_t i = 0;
+  switch (mode)
+  {
+    case MODE_SINGLE:
+      set_output(start_curr+1);
+      currents[start_curr] = (uint16_t)measure_Diode();
+      break;
+    case MODE_COARSE:
+      if(start_curr == 0)
+        i = 0x1;
+      else if(start_curr <= 2)
+        i = 0x2;
+      else if(start_curr <= 4)
+        i = 4;
+      else 
+        i = 8;
+      while(i <= end_curr)
+      {
+        set_output(i);
+        currents[i-1] = (uint16_t)measure_Diode();
+        i = i << 1;
+      }
+      break;
+    case MODE_MEDIUM:
+      i = start_curr;
+      while(i <= end_curr)
+      {
+        set_output(i+1);
+        currents[i] = (uint16_t)measure_Diode();
+        i += 2;
+      }
+      break;
+    case MODE_FINE:
+      i = start_curr;
+      while(i <= end_curr)
+      {
+        set_output(i+1);
+        currents[i] = (uint16_t)measure_Diode();
+        i++;
+      }
+      break;
+  }
+  set_output(0);
+}
+
+void set_output (uint8_t val)
+{
+  HAL_GPIO_WritePin(GPIOA, MA2_Pin, val & 0x01);
+  HAL_GPIO_WritePin(GPIOA, MA5_Pin, (val & 0x02) >> 1);
+  HAL_GPIO_WritePin(GPIOA, MA10_Pin, (val & 0x04) >> 2);
+  HAL_GPIO_WritePin(GPIOA, MA20_Pin, (val & 0x08) >> 3);
+  HAL_Delay(100);
+}
+
 uint32_t measure_Diode (void)
 {
-  uint32_t single_values[5];
+  raw = 0;
   //measuring
-  for(uint8_t i = 0; i < 5; i++)
+  for(uint8_t i = 0; i < 10; i++)
   {
+    delay_us(100);
     HAL_ADC_Start(&hadc1);                                      // start analog to digital conversion
     while(HAL_ADC_PollForConversion(&hadc1, 1000000) != HAL_OK);// wait for completing the conversion
-    single_values[i] = HAL_ADC_GetValue(&hadc1);                        // read sensor's digital value
+    raw += HAL_ADC_GetValue(&hadc1);                        // read sensor's digital value
   }
   //average and return
-  uint32_t temp = 0;
-  for(uint8_t i = 0; i < 5; i++)
-  {
-    temp += single_values[i];
-  }
-  return temp / 5;
+  return ((((raw / 10)+ ADC_OFFSET)*100) / (ADC_VOLT));
 }
 
 /* USER CODE END 4 */

@@ -168,21 +168,24 @@ int main(void)
     
     switch (tft_page)
     {
-    case PAGE_MAIN:
-      main_page_loop();
-      break;
-    case PAGE_DTEST:
-      diode_page_loop();
-      break;
-    case PAGE_FGEN:
-      /* code */
-      break;
-    case PAGE_SYMPSU:
-      sympsu_page_loop();
-      break;
-    case PAGE_SMPS:
-      /* code */
-      break;
+      case PAGE_MAIN:
+        main_page_loop();
+        break;
+      case PAGE_DTEST:
+        diode_page_loop();
+        break;
+      case PAGE_FGEN:
+        /* code */
+        break;
+      case PAGE_SYMPSU:
+        sympsu_page_loop();
+        break;
+      case PAGE_SMPS:
+        smps_page_loop();
+        break;
+      case PAGE_LOAD:
+        load_page_loop();
+        break;
     }
     
   }

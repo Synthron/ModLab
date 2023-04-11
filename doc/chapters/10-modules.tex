@@ -31,13 +31,13 @@ I will also mark everything that is currently just a concept or idea with a (c) 
 	\end{itemize}
 %-------------------------
 	\item Symmetric Switching Mode Power Supply (c)
-%\begin{itemize}
-%	\item Eventuell galvanisch getrennt
-%	\item Spannungs- und Stromgeregelt
-%	\item Co-Prozessor übernimmt Regelung
-%\end{itemize}
+	\begin{itemize}
+		\item Single regilated Voltage
+		\item Both CC and CV modes
+		\item Controlled via PWM
+	\end{itemize}
 %-------------------------
-	\item Linear Power Supply (c)
+%	\item Linear Power Supply (c)
 %\begin{itemize}
 %	\item Stromversorgung mit größerer Leistung
 %	\item Spannungs- und Stromgeregelt
@@ -81,12 +81,12 @@ I will also mark everything that is currently just a concept or idea with a (c) 
 		\item Co-Prozessor übernimmt Regelung
 	\end{itemize}
 %-------------------------
-	\item Electronic Load (c)
-	%\begin{itemize}
-	%	\item Signaltöne für verschiedene Angelegenheiten
-	%	\item Hochgefahren, Störung, Durchgang etc...
-	%	\item zwei Lautsprecher, einer für Melodie, einer für Signal
-	%\end{itemize}
+	\item Electronic Load
+	\begin{itemize}
+		\item Resistive Load for up to 15A
+		\item Two Channels
+		\item Load Limiter with thermocouple on Heatsink
+	\end{itemize}
 %-------------------------
 	\item Speaker Module (c)
 	%\begin{itemize}
@@ -301,8 +301,46 @@ Enabled Channels:
 \end{itemize}
 
 \section{Switching Mode Power Supply}
+This Power Supply is based on a TL494 PWM Control Circuit. The PWM Controller is getting the reference voltages for Output Voltage and Current from the STM32 via filtered PWM signals. This way a complicated and possibly slow and inaccurate software PID regulator is avoided while the circuit complexity is held at a minimum. A voltage divider is generating the feedback voltage, while a high-current shunt and differential amplifier is generating the feedback voltage for the current. 
 
+The following specs were set for Rev 1. This module will need a redesign in order to fix some mistakes.
+
+\begin{itemize}
+	\item Voltage
+	\begin{itemize}
+		\item 2 .. 22 V Output
+		\item 10 mV resolution
+	\end{itemize}
+	\item Current
+	\begin{itemize}
+		\item 0 .. 5 A Output
+		\item 10 mA resolution
+	\end{itemize}
+\end{itemize}
 
 \subsection{Parameters}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{No.}   &   \textbf{Size} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        10h   &  2 Byte &  Set Voltage [10mV]\\ \hline
+		11h   &  2 Byte &  Set Current [10mA]\\ \hline
+		20h   &  2 Byte &  Measured Voltage [10mV]\\ \hline
+		21h   &  2 Byte &  Measured Current [10mA]\\ \hline
+    \end{tabular}
+	\caption{SMPS Parameter List}
+\label{tab:Par-SMPS}
+\end{table}
+
 \subsection{Operation Modes}
+n.a.
 \subsection{Channels/Outputs}
+Enabled Channels:
+\begin{itemize}
+	\item ADC0
+	\item ADC1
+	\item PWM0
+	\item PWM1
+	\item Output Relais
+\end{itemize}

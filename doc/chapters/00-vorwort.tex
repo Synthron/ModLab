@@ -1,17 +1,15 @@
 \chapter{Introduction}
 
-The ModLab is a modular electronics workstation designed from scratch and built with mostly readily available parts. 
+This documentation is descibing the origins, design choices and inner workings of the ModLab. The ModLab is a modular electronics workstation designed from scratch and built with mostly readily available parts. 
 
-The ModLab is the successor of my Arduino Workstation which was meant to be a better version of the FMAS (\textit{\textbf{F}lexibles \textbf{M}odulares \textbf{A}usbildungs-\textbf{S}ystem}, Flexible Modular Training System) I made during my apprenticeship at the Karlsruhe Institute of Technology. The backplane on the FMAS consisted entirely of AC voltages and one 9V DC voltage which is not really ideal. Also it was all pure logic with no programmable parts. This made it quite functional but stupid (not dumb, but no programmable parts), so I decided to improve on it. 
-
-The Arduino Workstation was my first attempt and (from my current perspective) served only as a proof of concept. My skills were quite low at that time and all I knew was Arduino, so I went with that. It kinda worked, but was not really useful and since I made some bad design choices, I had to scrap it. But it was a start and laid out a foundation. 
+It is the successor of my Arduino Workstation which was meant to be a better version of the FMAS (\textit{\textbf{F}lexibles \textbf{M}odulares \textbf{A}usbildungs-\textbf{S}ystem}, Flexible Modular Training System) I made during my apprenticeship at the Karlsruhe Institute of Technology. The backplane on the FMAS consisted entirely of AC voltages and one 9V DC voltage which is not really ideal. Also it was all pure logic with no programmable parts. This made it quite functional but stupid (not dumb, but no programmable parts), so I decided to improve on it. 
 
 With the ModLab I wanted to finally build my dream system. With the motto ``absolutely over-engineered'' it is supposed to be powerful, better planned and more intelligent. Also the 19``-Rack houses the FMAS as well, to show the roots of it (and also I didn't want to scrap it because of nostalgia). 
 
-V2 (V1 is the Arduino Workstation) isn't really documented, because a) it was utter crap and b) it didn't work. I used an Arduino DUE board as main controller which did the job, but not really well\dots
+The Arduino Workstation was my first attempt and (from my current perspective) served only as a proof of concept. My skills were quite low at that time and all I knew was Arduino, so I went with that. It kinda worked, but was not really useful and since I made some bad design choices, I had to scrap it. But it was a start and laid out a foundation. 
 
-The current version is V3 and is under development. I uses primarily STM32 controllers, but still has the capability of using other controllers as well. 
+V2 isn't really documented, because a) it was utter crap and b) it didn't work. I used an Arduino DUE board as main controller which did the job, but not really well\dots
 
-\hspace{1cm}
+The current version is V3 and is under development. It uses primarily STM32 controllers, but still has the capability of using other controllers as well. 
 
 Before I start talking about all the modules, I want to talk a bit about the FMAS and the Rack itself, so bear with my ramblings and enjoy reading.

@@ -4,7 +4,6 @@
 % --------------------------------------------------------------------
 
 \documentclass[11pt, a4paper, listof=numbered, captions=tableheading, headinclude, table, xcdraw]{scrreprt}
-
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
 \usepackage{tikz}
@@ -49,13 +48,14 @@
 \setlength{\parindent}{0pt}
 
 
+
 % Seitenränder festlegen
 \usepackage[top=1.5cm,bottom=1.5cm, includeheadfoot]{geometry}
 
 % ---------------------------------------
 % Titeldefinition
 \newcommand{\Titel}{Documentation\\\vspace{.5mm}ModLab V3.0}
-\newcommand{\Caption}{for the modular laboratory station ModLab}
+\newcommand{\Caption}{A modular electronics workstation}
 \newcommand{\SignateAuthor}{\textit{Made with \LaTeX}}
 \newcommand{\Stand}{\textit{Compiled: \today}}
 % Sonstiges in titel.ltx und titel-meta.ltx
@@ -72,6 +72,7 @@
 \begin{document}
 \input{titel/titel.tex}
 
+\KOMAoptions{parskip=half}
 % --------------------------------------------------------------------
 % Verzeichnisse
 % --------------------------------------------------------------------

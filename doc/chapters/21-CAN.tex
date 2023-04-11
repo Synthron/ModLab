@@ -52,6 +52,16 @@ The ID structure will be used as specified in the following table. The ``xx'' in
 
 \subsection{Auto-Messages}
 \textbf{\textcolor[HTML]{FF0000}{TBD}}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \textbf{Value Byte 1}   &   \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        10h    &   Conversion Done    \\ \hline
+    \end{tabular}
+    \caption{CAN Auto Messages}
+    \label{tab:CAN-Auto}
+\end{table}
 
 \subsection{Base-Addresses}
 \begin{table}[H]
@@ -66,12 +76,12 @@ The ID structure will be used as specified in the following table. The ``xx'' in
         38h    &   reserved \\ \hline
         3Ch    &   24V Switching Mode Power Supply \\\hline
         40h    &   DDS Waveform Generator \\ \hline
+        50h    &   Electronic Load \\ \hline
     \end{tabular}
     \caption{CAN Addresses}
     \label{tab:CAN-ADD}
 \end{table}
 
-\newpage
 
 \subsection{Commands}
 Overview:

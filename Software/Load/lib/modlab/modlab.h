@@ -1,6 +1,6 @@
 /** @file modlab.h
  * 
- * @brief Library for ModLab HBC
+ * @brief Library for ModLab for Devices
  *
  * @author Synthron
  * 
@@ -13,26 +13,36 @@
 extern "C" {
 #endif
 
+#include "main.h"
 #include "tim.h"
-#include "tft.h"
 #include "can.h"
+#ifdef SYMPSU
+#include "adc.h"
+#endif
+#ifdef SMPS
+#include "adc.h"
+#endif
+#ifdef LOAD
+#include "adc.h"
+#endif
 
 //Device Defines
-#define ADDR_HBC 0x10
-#define ADDR_DiodeTester 0x20
-#define ADDR_SymPSU 0x30
-#define ADDR_SMPS 0x3C
-#define ADDR_WaveGen 0x40
-#define ADDR_Load 0x50
+#define ADDR_HBC 0x510
+#define ADDR_DiodeTester 0x520
+#define ADDR_SymPSU 0x530
+#define ADDR_SMPS 0x53C
+#define ADDR_WaveGen 0x540
+#define ADDR_Load 0x550
 
 //Message Types Define
 #define ADDR_AUTO 0x700
 #define ADDR_ACK  0x600
 #define ADDR_NACK 0x300
 
+
 //Command Defines
 #define CMD_RESET   0x01 //Reset Module
-#define CMD_PING    0x05 //Ping/Discovery-Mode
+#define CMD_PING    0x05 //Reset Module
 #define CMD_SET8    0x10 //Set 8bit
 #define CMD_GET8    0x11 //Get 8bit
 #define CMD_SET16   0x14 //Set 16bit
@@ -43,8 +53,8 @@ extern "C" {
 #define CMD_SETMODE 0x60 //Set Operation mode
 #define CMD_GETMODE 0x61 //Get Operation Mode
 
-//Automessage Defines
-#define AUTO_DONE 0x10 //Conversion finished
+//Auto Message Defines
+#define AUTO_DONE   0x10 // Conversion finished
 
 //Diode Tester Params
 #define MA2         0x10
@@ -64,6 +74,10 @@ extern "C" {
 #define MA37        0x1E
 #define START_CURR  0x20
 #define END_CURR    0x21
+#define MODE_SINGLE 0
+#define MODE_COARSE 1
+#define MODE_MEDIUM 2
+#define MODE_FINE   3
 
 //SymPSU Params
 #define V_POS_SET 0x10
@@ -91,29 +105,36 @@ extern "C" {
 CAN_TxHeaderTypeDef TxHeader;
 uint8_t TxData[8];
 uint32_t TxMailbox;
-CAN_RxHeaderTypeDef RxHeader;
-uint8_t RxData[8];
-uint8_t send_ok;
-
-uint8_t can_ack;
-uint8_t rec_ack, rec_nack, rec_8;
-uint16_t rec_16;
-char buffer[64];
-char out_buf[64];
 
 void timer_init();
 void delay_us(uint16_t us);
 
-void can_parse(void);
 void send_cmd (uint16_t dev, uint8_t cmd);
+void send_rec (uint16_t dev, uint8_t cmd, uint8_t stat);
+void send_rec8 (uint16_t dev, uint8_t cmd, uint8_t stat, uint8_t val);
+void send_rec16 (uint16_t dev, uint8_t cmd, uint8_t stat, uint16_t val);
 void send_get (uint16_t dev, uint8_t cmd, uint8_t reg);
 void send_set8 (uint16_t dev, uint8_t reg, uint8_t val);
 void send_set16 (uint16_t dev, uint8_t reg, uint16_t val);
-void send_set_opmode (uint16_t dev, uint8_t mode);
-void scan_dev(void);
-void set_dev(void);
 void transmit(void);
 
+#ifdef SYMPSU
+void ADC_Select_CH0 (void);
+void ADC_Select_CH1 (void);
+void ADC_Select_CH2 (void);
+void ADC_Select_CH3 (void);
+#endif
+
+#ifdef SMPS
+void ADC_Select_CH0 (void);
+void ADC_Select_CH1 (void);
+#endif
+
+#ifdef LOAD
+void ADC_Select_CH0 (void);
+void ADC_Select_CH1 (void);
+void ADC_Select_CH2 (void);
+#endif
 
 #ifdef __cplusplus
 }

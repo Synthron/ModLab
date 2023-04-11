@@ -66,6 +66,10 @@ void ADC_recalibration(void);
 #define MA10_GPIO_Port GPIOA
 #define MA20_Pin GPIO_PIN_6
 #define MA20_GPIO_Port GPIOA
+#define ADDR1_Pin GPIO_PIN_3
+#define ADDR1_GPIO_Port GPIOB
+#define ADDR0_Pin GPIO_PIN_4
+#define ADDR0_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
