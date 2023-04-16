@@ -27,7 +27,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "modlab.h"
+#include "ad9833.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,6 +48,18 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint16_t address;
+
+uint8_t outputState = 0;
+
+// https://controllerstech.com/can-protocol-in-stm32/
+CAN_TxHeaderTypeDef TxHeader;
+CAN_RxHeaderTypeDef RxHeader;
+uint8_t TxData[8];
+uint32_t TxMailbox;
+uint8_t RxData[8];
+uint8_t stat = 0;
+
 
 /* USER CODE END PV */
 
@@ -96,6 +109,22 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  AD9833_Init(wave_triangle, 1000000, 0);
+  timer_init();
+
+  HAL_CAN_Start(&hcan);
+
+  // get address
+  address = ADDR_WaveGen | (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3)) | (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4) << 1);
+
+
+  HAL_GPIO_WritePin(OUT_Relais_GPIO_Port, OUT_Relais_Pin, 1);
+
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1); // GAIN
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2); // OFFSET
+
+  TIM2->CCR1 = 0xFFFF;
+  TIM2->CCR2 = 0x8000;
 
   /* USER CODE END 2 */
 

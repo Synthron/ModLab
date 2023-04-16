@@ -1,6 +1,6 @@
 #MicroXplorer Configuration settings - do not modify
-CAN.BS1=CAN_BS1_15TQ
-CAN.BS2=CAN_BS2_2TQ
+CAN.BS1=CAN_BS1_14TQ
+CAN.BS2=CAN_BS2_3TQ
 CAN.CalculateBaudRate=1000000
 CAN.CalculateTimeBit=999.99
 CAN.CalculateTimeQuantum=55.55555555555556

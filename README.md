@@ -9,7 +9,8 @@ But now It will be bigger, better and way too complicated.
 
 ---
 
-You can also find this repository over on [GitHub](https://github.com/Synthron/ModLab)
+[GitHub](https://github.com/Synthron/ModLab)
+[Gitlab](https://gitlab.synthron.de/Synthron/ModLab)
 
 ---
 
@@ -26,6 +27,7 @@ You can also find this repository over on [GitHub](https://github.com/Synthron/M
   - [ ] explain what exactly the ModLab is
   - [X] update changes for TFT
   - [X] Explain TFT Protocol
+  - [ ] Attach Schematics
 - [X] Cleanup Repo
 
 ---
@@ -124,7 +126,7 @@ You can also find this repository over on [GitHub](https://github.com/Synthron/M
   - [X] CAN-Interface
 - Waveform Generator
   - [ ] PWM Signals
-  - [ ] AD9833
+  - [X] AD9833
   - [ ] CAN-Interface
 - Power Monitor
   - [ ] Voltage Measurement

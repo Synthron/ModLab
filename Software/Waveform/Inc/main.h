@@ -66,6 +66,8 @@ void Error_Handler(void);
 #define FSYNC_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
+#define AD9833
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
