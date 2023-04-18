@@ -125,9 +125,9 @@ But now It will be bigger, better and way too complicated.
   - [X] ADC
   - [X] CAN-Interface
 - Waveform Generator
-  - [ ] PWM Signals
+  - [X] PWM Signals
   - [X] AD9833
-  - [ ] CAN-Interface
+  - [X] CAN-Interface
 - Power Monitor
   - [ ] Voltage Measurement
   - [ ] Current Measurement

@@ -42,6 +42,8 @@ void diode_page_loop(void);
 //fgen function prototypes
 void enable_fgen(uint8_t ch);
 void disable_fgen(uint8_t ch);
+void fgen_setdata(void);
+void fgen_page_loop(void);
 
 //sympsu function prototypes
 void enable_sympsu(uint8_t ch);

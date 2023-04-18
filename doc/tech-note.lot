@@ -10,14 +10,3 @@
 \contentsline {table}{\numberline {5.1}{\ignorespaces Bus-Layout}}{12}{table.34}%
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {6.1}{\ignorespaces Diode Tester Parameter List}}{17}{table.44}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Diode Tester Parameter List}}{18}{table.46}%
-\contentsline {table}{\numberline {6.3}{\ignorespaces SymPSU Parameter List}}{19}{table.54}%
-\contentsline {table}{\numberline {6.4}{\ignorespaces SMPS Parameter List}}{21}{table.59}%
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {7.1}{\ignorespaces CAN-Messages}}{24}{table.71}%
-\contentsline {table}{\numberline {7.2}{\ignorespaces CAN Auto Messages}}{24}{table.73}%
-\contentsline {table}{\numberline {7.3}{\ignorespaces CAN Addresses}}{25}{table.75}%
-\contentsline {table}{\numberline {7.4}{\ignorespaces CAN-Commands}}{25}{table.77}%
-\contentsline {table}{\numberline {7.5}{\ignorespaces Data Structure Diode Tester}}{32}{table.95}%
-\contentsline {table}{\numberline {7.6}{\ignorespaces Data Structure Function Generator}}{32}{table.96}%
-\contentsline {table}{\numberline {7.7}{\ignorespaces Data Structure Symmetric Power Supply}}{32}{table.97}%

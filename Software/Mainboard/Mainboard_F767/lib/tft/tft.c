@@ -203,7 +203,7 @@ void main_page_loop(void)
       //tft_debug = setdebug & 0x0F;
       break;
     case 3:
-      //sim_debug = setdebug & 0x0F;
+      sim_debug = setdebug & 0x0F;
       break;
     case 4:
       scan_dev();
@@ -268,7 +268,11 @@ void diode_page_loop(void)
     enableblock = 0;
     for (int i = 0; i < 4; i++)
     {
-      if ((dev_diode >> i) & 0x01)
+      if (sim_debug)
+      {
+        enable_diode(i);
+      }
+      else if ((dev_diode >> i) & 0x01)
       {
         enable_diode(i);
       }
@@ -332,6 +336,7 @@ void diode_page_loop(void)
  *
  * Ausgang freischalten: 0x50 + <10/11> <20/21> <30/31> <40/41>
  */
+
 void enable_fgen(uint8_t ch)
 {
   uint8_t len = sprintf(tft_string, "vis t%d,0", 47 + ch);
@@ -344,6 +349,54 @@ void disable_fgen(uint8_t ch)
   tft_send(tft_string, len);
 }
 
+void fgen_page_loop(void)
+{
+  if (enableblock == 1)
+  {
+    enableblock = 0;
+    for (int i = 0; i < 4; i++)
+    {
+      if (sim_debug)
+      {
+        enable_fgen(i);
+      }
+      else if((dev_fgen >> i) & 0x01)
+      {
+        enable_fgen(i);
+      }
+      else
+      {
+        disable_fgen(i);
+      }
+    }
+  }
+
+  if(setdata)
+  {
+    setdata = 0;
+    fgen_setdata();
+  }
+
+  if(setout)
+  {
+    setout = 0;
+    if(outstate)
+    {
+      send_cmd(ADDR_WaveGen + module, CMD_ENOUT);
+    }
+    else
+    {
+      send_cmd(ADDR_WaveGen + module, CMD_DISOUT);
+    }
+  }
+}
+
+void fgen_setdata(void)
+{
+  send_set32(ADDR_WaveGen + module, FREQUENCY, frequency);
+  send_set16(ADDR_WaveGen + module, GAIN, amplitude);
+  send_set16(ADDR_WaveGen + module, OFFSET, offset);
+}
 /**
  * TFT-Steuerung SymPSU:
  * SymPSU ausgewählt:
@@ -386,7 +439,11 @@ void sympsu_page_loop(void)
     enableblock = 0;
     for (int i = 0; i < 4; i++)
     {
-      if ((dev_sympsu >> i) & 0x01)
+      if (sim_debug)
+      {
+        enable_sympsu(i);
+      }
+      else if ((dev_sympsu >> i) & 0x01)
       {
         enable_sympsu(i);
       }
@@ -506,7 +563,11 @@ void smps_page_loop(void)
     enableblock = 0;
     for (int i = 0; i < 4; i++)
     {
-      if ((dev_smps >> i) & 0x01)
+      if (sim_debug)
+      {
+        enable_smps(i);
+      }
+      else if ((dev_smps >> i) & 0x01)
       {
         enable_smps(i);
       }
@@ -620,7 +681,11 @@ void load_page_loop(void)
     enableblock = 0;
     for (int i = 0; i < 4; i++)
     {
-      if ((dev_load >> i) & 0x01)
+      if (sim_debug)
+      {
+        enable_load(i);
+      }
+      else if ((dev_load >> i) & 0x01)
       {
         enable_load(i);
       }

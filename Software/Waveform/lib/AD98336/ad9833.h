@@ -67,6 +67,7 @@ extern SPI_HandleTypeDef 		AD9833_SPI_PORT;
 typedef enum {
 	wave_triangle,
 	wave_square,
+    wave_square2,
 	wave_sine,
 } WaveDef;
 

@@ -227,14 +227,33 @@ For most of the design I have to thank ``Daumemo'' from \textcolor{blue}{\href{h
 
 The board mainly consists of the STM32F103 controller, the AD9833 signal generator, a VCA (voltage controlled amplifier) and an output amplifier. Gain and Offset are controlled via PWM, the Interface to the AD9833 is SPI. 
 
-The Signal Generator is capable of generating Sine, Triangle and Square waves from 0.1Hz up to 12.5MHz with a 0.1Hz resolution. 
-
-\vspace{1cm}
-
-I will add more info once I get to program the module. 
+The Signal Generator is capable of generating Sine, Triangle and Square waves from 1Hz up to 12.5MHz with a 1Hz resolution. 
 
 \subsection{Parameters}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{No.}   &   \textbf{Size} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        10h   &  4 Byte &  Set Frequency [1Hz]\\ \hline
+		20h   &  2 Byte &  Set Vout Peak-Peak [0.1V]\\ \hline
+		30h	  &  2 Byte &  Offset Voltage [0.1V] \\ \hline
+    \end{tabular}
+	\caption{AD9833 Parameter List}
+\label{tab:Par-Waveform9833}
+\end{table}
 \subsection{Operation Modes}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{No.}   & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        0h   &  Square Wave\\ \hline
+		1h   &  Sine Wave\\ \hline
+		2h	 &  Triangular Wave \\ \hline
+    \end{tabular}
+	\caption{AD9833 Waveforms List}
+\label{tab:mode-Waveform9833}
 \subsection{Channels/Outputs}
 \section{Symmetric Linear Power Supply (SymPSU)}
 The design for the symmetric power supply is derived from the user ``The Big One'' over on \textcolor{blue}{\href{https://hackaday.io/project/4154-bench-power-supply}{Hackaday}}. I adopted it to my STM32 controller and to 3V3 supply voltage. Also I switched the control voltage generation from a dedicated DAC to the PWM-channels of the STM32. I am using the internal ADC on the STM32 as well. 

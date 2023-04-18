@@ -162,6 +162,7 @@ int main(void)
   {
     if((tft_cmd == CMD_PAGESET) && (setdata == 1))
     {
+      HAL_Delay(10);
       enableblock = 1;
       setdata = 0;
     }
@@ -175,7 +176,7 @@ int main(void)
         diode_page_loop();
         break;
       case PAGE_FGEN:
-        /* code */
+        fgen_page_loop();
         break;
       case PAGE_SYMPSU:
         sympsu_page_loop();

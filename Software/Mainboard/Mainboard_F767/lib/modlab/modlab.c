@@ -146,6 +146,24 @@ void send_set16 (uint16_t dev, uint8_t reg, uint16_t val)
     transmit();
 }
 
+void send_set32 (uint16_t dev, uint8_t reg, uint32_t val)
+{
+    #ifdef HBC
+    dev |= 0x500;
+    #endif
+    TxHeader.IDE = CAN_ID_STD;
+    TxHeader.RTR = CAN_RTR_DATA;
+    TxHeader.StdId = dev;
+    TxHeader.DLC = 6;
+    TxData[0] = CMD_SET32;
+    TxData[1] = reg;
+    TxData[2] = val >> 24;
+    TxData[3] = (uint8_t)(val >> 16 & 0x00FF);
+    TxData[4] = (uint8_t)(val >> 8 & 0x00FF);
+    TxData[5] = (uint8_t)(val & 0x00FF);
+    transmit();
+}
+
 void send_set_opmode (uint16_t dev, uint8_t mode)
 {
     #ifdef HBC

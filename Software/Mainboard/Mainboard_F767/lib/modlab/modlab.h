@@ -37,6 +37,8 @@ extern "C" {
 #define CMD_GET8    0x11 //Get 8bit
 #define CMD_SET16   0x14 //Set 16bit
 #define CMD_GET16   0x15 //get 16bit
+#define CMD_SET32   0x18 //set 32bit
+#define CMD_GET32   0x18 //get 32bit
 #define CMD_GETSTAT 0x20 //Get Status
 #define CMD_ENOUT   0x40 //Enable Output
 #define CMD_DISOUT  0x41 //Disable Output
@@ -88,6 +90,14 @@ extern "C" {
 #define LOAD_CH1_Get 0x21
 #define LOAD_TEMP_Get 0x22
 
+//Waveform Params
+#define FREQUENCY   0x10
+#define GAIN        0x20
+#define OFFSET      0x30
+#define SQUAREWAVE     0
+#define SINEWAVE       1
+#define TRIANGLEWAVE   2
+
 CAN_TxHeaderTypeDef TxHeader;
 uint8_t TxData[8];
 uint32_t TxMailbox;
@@ -109,6 +119,7 @@ void send_cmd (uint16_t dev, uint8_t cmd);
 void send_get (uint16_t dev, uint8_t cmd, uint8_t reg);
 void send_set8 (uint16_t dev, uint8_t reg, uint8_t val);
 void send_set16 (uint16_t dev, uint8_t reg, uint16_t val);
+void send_set32 (uint16_t dev, uint8_t reg, uint32_t val);
 void send_set_opmode (uint16_t dev, uint8_t mode);
 void scan_dev(void);
 void set_dev(void);

@@ -79,6 +79,7 @@ void AD9833_SetWaveform(WaveDef Wave)
 {
 	if (Wave == wave_sine) 			_waveform = WAVEFORM_SINE;
 	else if (Wave == wave_square) 	_waveform = WAVEFORM_SQUARE;
+	else if (Wave == wave_square2) 	_waveform = WAVEFORM_SQUARE_DIV2;
 	else if (Wave == wave_triangle)	_waveform = WAVEFORM_TRIANGLE;
 	AD9833_WriteCfgReg();
 }

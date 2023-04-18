@@ -5338,7 +5338,7 @@
     (property "Sheetname" "Analog")
     (path "/0301c9d0-66dd-4a7f-a8fa-98a9fe638e4d/4ee42fcd-c088-4b08-a584-b4878cc78c30")
     (attr smd)
-    (fp_text reference "U204" (at 0 -2.6 -90) (layer "F.SilkS")
+    (fp_text reference "U204" (at -2.794 3.81) (layer "F.SilkS")
       (effects (font (size 1 1) (thickness 0.15)))
       (tstamp d46f508c-8787-4a38-abec-ad78b55aecc8)
     )

@@ -38,6 +38,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define PWM_V_SQUARE (float)779.8319328
+#define SQUARE_OFFSET (0x0100 * 27 + 0x00FF)
+#define PWM_V_SINE  (float)2645.180602
+#define SINE_OFFSET (0x0100 * 30 + 0x00FF)
+#define PWM_OFFSET_NULL 0x8210
+#define PWM_OFFSET_STEP100 22*0x0010
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -51,6 +58,12 @@
 uint16_t address;
 
 uint8_t outputState = 0;
+uint8_t setfreq = 0;
+
+uint8_t waveform = wave_square;
+uint16_t gain  = 0;
+int16_t offset = 0;
+uint32_t freq = 0;
 
 // https://controllerstech.com/can-protocol-in-stm32/
 CAN_TxHeaderTypeDef TxHeader;
@@ -66,7 +79,9 @@ uint8_t stat = 0;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void setgain(uint8_t voltage);
+void setoffset(int16_t os);
+void CAN_Filter(uint8_t addr);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -109,22 +124,27 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  AD9833_Init(wave_triangle, 1000000, 0);
   timer_init();
 
   HAL_CAN_Start(&hcan);
 
   // get address
-  address = ADDR_WaveGen | (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3)) | (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4) << 1);
+  address = ADDR_WaveGen | (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4)) | (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3) << 1);
 
 
-  HAL_GPIO_WritePin(OUT_Relais_GPIO_Port, OUT_Relais_Pin, 1);
+  HAL_GPIO_WritePin(OUT_Relais_GPIO_Port, OUT_Relais_Pin, 0);
 
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1); // GAIN
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2); // OFFSET
 
-  TIM2->CCR1 = 0xFFFF;
-  TIM2->CCR2 = 0x8000;
+  CAN_Filter(address);
+  HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
+  __enable_irq();
+
+  
+  AD9833_Init(waveform, 0, 0);
+  setgain(0);
+  setoffset(0);
 
   /* USER CODE END 2 */
 
@@ -132,6 +152,17 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    HAL_GPIO_WritePin(OUT_Relais_GPIO_Port, OUT_Relais_Pin, outputState);
+    if(setfreq)
+    {
+      setfreq = 0;
+      AD9833_Init(waveform, freq, 0);
+    }
+
+    setgain(gain);
+    setoffset(offset);
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -178,6 +209,128 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+  if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  //Send Ping
+  if (RxData[0] == CMD_PING)
+  {
+    send_rec(address, RxData[0], stat);
+  }
+  else if (RxData[0] == CMD_SET16) // set 16bit
+  {
+    switch (RxData[1])
+    {
+    case GAINOUT:
+      gain = (RxData[2] << 8) | RxData[3];
+      stat = 0;
+      break;
+    case OFFSETOUT:
+      offset = (RxData[2] << 8) | RxData[3];
+      stat = 0;
+      break;
+    default: // Index Mismatch
+      stat = 1;
+      break;
+    }
+    send_rec(address, RxData[0], stat);
+  }
+  else if (RxData[0] == CMD_SET32) // set 32bit
+  {
+    switch (RxData[1])
+    {
+    case FREQUENCY:
+      freq = (RxData[2] << 24) | (RxData[3] << 16) | (RxData[4] << 8) | RxData[5];
+      stat = 0;
+      setfreq = 1;
+      break;
+    default: // Index Mismatch
+      stat = 1;
+      break;
+    }
+    send_rec(address, RxData[0], stat);
+  }
+  else if (RxData[0] == CMD_SETMODE) // set opmode waveform
+  {
+    switch (RxData[1])
+    {
+    case SQUAREWAVE:
+      stat = 0;
+      waveform = wave_square;
+      setfreq = 1;
+      break;
+    case SINEWAVE:
+      stat = 0;
+      waveform = wave_sine;
+      setfreq = 1;
+      break;
+    case TRIANGLEWAVE:
+      stat = 0;
+      waveform = wave_triangle;
+      setfreq = 1;
+      break;
+    default: // Index Mismatch
+      stat = 1;
+      break;
+    }
+    send_rec(address, RxData[0], stat);
+  }
+  else if (RxData[0] == CMD_ENOUT || RxData[0] == CMD_DISOUT) // set Output
+  {
+    outputState = !(RxData[0] & 0x01);
+    stat = 0;
+    send_rec(address, RxData[0], stat);
+  }
+  else // Unknown Command
+  {
+    stat = 0x40;
+    send_rec(address, RxData[0], stat);
+  }
+}
+
+void CAN_Filter(uint8_t addr)
+{
+  CAN_FilterTypeDef canfilterconfig;
+
+  canfilterconfig.FilterActivation = CAN_FILTER_ENABLE;
+  canfilterconfig.FilterBank = 0; // which filter bank to use from the assigned ones
+  canfilterconfig.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+  canfilterconfig.FilterIdHigh = (0x500 | addr) << 5;
+  canfilterconfig.FilterIdLow = 0;
+  canfilterconfig.FilterMaskIdHigh = 0x1FFF;
+  canfilterconfig.FilterMaskIdLow = 0xFFFF;
+  canfilterconfig.FilterMode = CAN_FILTERMODE_IDMASK;
+  canfilterconfig.FilterScale = CAN_FILTERSCALE_32BIT;
+  canfilterconfig.SlaveStartFilterBank = 1; // how many filters to assign to the CAN1 (master can)
+
+  HAL_CAN_ConfigFilter(&hcan, &canfilterconfig);
+}
+
+void setgain(uint8_t voltage)
+{
+  switch (waveform)
+  {
+  case wave_square:
+    TIM2->CCR1 = ((uint16_t)(((float)(voltage-4)/10.0) * PWM_V_SQUARE)) + SQUARE_OFFSET;
+    break;
+  case wave_sine:
+  case wave_triangle:
+    TIM2->CCR1 = ((uint16_t)(((float)(voltage)/10.0) * PWM_V_SINE)) + SINE_OFFSET;
+    break;  
+  default:
+    break;
+  }
+}
+
+void setoffset(int16_t os)
+{
+  TIM2->CCR2 = PWM_OFFSET_NULL - (os * PWM_OFFSET_STEP100);
+}
+
 
 /* USER CODE END 4 */
 
