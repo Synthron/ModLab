@@ -46,7 +46,7 @@ void tft_parse(void)
       }
       else if (tft_page == PAGE_FGEN)
       {
-        HAL_UART_Receive_IT(&huart1, RxBuffer, 9);
+        HAL_UART_Receive_IT(&huart1, RxBuffer, 10);
       }
       else if (tft_page == PAGE_SYMPSU)
       {
@@ -105,9 +105,10 @@ void tft_parse(void)
       else if (tft_page == PAGE_FGEN)
       {
         module = RxBuffer[0] - 1;
-        frequency = (RxBuffer[4] << 24) + (RxBuffer[3] << 16) + (RxBuffer[2] << 8) + (RxBuffer[1]);
-        amplitude = (RxBuffer[6] << 8) + (RxBuffer[5]);
-        offset = (RxBuffer[8] << 8) + (RxBuffer[7]);
+        wave = RxBuffer[1];
+        frequency = (RxBuffer[5] << 24) + (RxBuffer[4] << 16) + (RxBuffer[3] << 8) + (RxBuffer[2]);
+        amplitude = (RxBuffer[7] << 8) + (RxBuffer[6]);
+        offset = (RxBuffer[9] << 8) + (RxBuffer[8]);
       }
       else if (tft_page == PAGE_SYMPSU)
       {
@@ -327,8 +328,8 @@ void diode_page_loop(void)
  * TFT-Steuerung F-Gen:
  * 55 02
  * Kanäle sichtbar schalten:
- * 	"vis t<47-50>,0" + ff ff ff zum aktivieren
- * 	"vis t<47-50>,1" + ff ff ff zum deaktivieren
+ * 	"vis t<51-54>,0" + ff ff ff zum aktivieren
+ * 	"vis t<51-54>,1" + ff ff ff zum deaktivieren
  *
  * Daten für Frequenz, Amplitude, Offset:
  * 0x5C <01-04> <LSB...MSB F> <LSB_MSB A> <LSB_MSB O>
@@ -339,13 +340,13 @@ void diode_page_loop(void)
 
 void enable_fgen(uint8_t ch)
 {
-  uint8_t len = sprintf(tft_string, "vis t%d,0", 47 + ch);
+  uint8_t len = sprintf(tft_string, "vis t%d,0", 51 + ch);
   tft_send(tft_string, len);
 }
 
 void disable_fgen(uint8_t ch)
 {
-  uint8_t len = sprintf(tft_string, "vis t%d,1", 47 + ch);
+  uint8_t len = sprintf(tft_string, "vis t%d,1", 51 + ch);
   tft_send(tft_string, len);
 }
 
@@ -393,6 +394,7 @@ void fgen_page_loop(void)
 
 void fgen_setdata(void)
 {
+  send_set_opmode(ADDR_WaveGen + module, wave);
   send_set32(ADDR_WaveGen + module, FREQUENCY, frequency);
   send_set16(ADDR_WaveGen + module, GAIN, amplitude);
   send_set16(ADDR_WaveGen + module, OFFSET, offset);

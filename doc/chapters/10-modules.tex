@@ -217,11 +217,6 @@ Start Measurement with ``Enable Output'' Command.
 	\caption{Diode Tester Parameter List}
 \label{tab:Modes-Diode}
 \end{table}
-\subsection{Channels/Outputs}
-Enabled Channels:
-\begin{itemize}
-	\item ADC0
-\end{itemize}
 \section{Waveform Generator DDS}
 For most of the design I have to thank ``Daumemo'' from \textcolor{blue}{\href{https://daumemo.com}{daumemo.com}}. I wanted to use the AD9833 waveform generator IC and his guide helped me design the circuit around it. 
 
@@ -254,7 +249,8 @@ The Signal Generator is capable of generating Sine, Triangle and Square waves fr
     \end{tabular}
 	\caption{AD9833 Waveforms List}
 \label{tab:mode-Waveform9833}
-\subsection{Channels/Outputs}
+\end{table}
+
 \section{Symmetric Linear Power Supply (SymPSU)}
 The design for the symmetric power supply is derived from the user ``The Big One'' over on \textcolor{blue}{\href{https://hackaday.io/project/4154-bench-power-supply}{Hackaday}}. I adopted it to my STM32 controller and to 3V3 supply voltage. Also I switched the control voltage generation from a dedicated DAC to the PWM-channels of the STM32. I am using the internal ADC on the STM32 as well. 
 
@@ -279,7 +275,7 @@ After tweaking the code, I programmed the following resolutions:
 	\end{itemize}
 	\item Currents
 	\begin{itemize}
-		\item 0.1 mA / step
+		\item 10 mA / step
 	\end{itemize}
 \end{itemize}
 
@@ -303,21 +299,6 @@ I am quite happy with these specs, but will likely tweak the design in the futur
 	\caption{SymPSU Parameter List}
 \label{tab:Par-SymPSU}
 \end{table}
-\subsection{Operation Modes}
-n/a.
-\subsection{Channels/Outputs}
-Enabled Channels:
-\begin{itemize}
-	\item ADC0
-	\item ADC1
-	\item ADC2
-	\item ADC3
-	\item PWM0
-	\item PWM1
-	\item PWM2
-	\item PWM3
-	\item Output Relais
-\end{itemize}
 
 \section{Switching Mode Power Supply}
 This Power Supply is based on a TL494 PWM Control Circuit. The PWM Controller is getting the reference voltages for Output Voltage and Current from the STM32 via filtered PWM signals. This way a complicated and possibly slow and inaccurate software PID regulator is avoided while the circuit complexity is held at a minimum. A voltage divider is generating the feedback voltage, while a high-current shunt and differential amplifier is generating the feedback voltage for the current. 
@@ -351,15 +332,3 @@ The following specs were set for Rev 1. This module will need a redesign in orde
 	\caption{SMPS Parameter List}
 \label{tab:Par-SMPS}
 \end{table}
-
-\subsection{Operation Modes}
-n.a.
-\subsection{Channels/Outputs}
-Enabled Channels:
-\begin{itemize}
-	\item ADC0
-	\item ADC1
-	\item PWM0
-	\item PWM1
-	\item Output Relais
-\end{itemize}

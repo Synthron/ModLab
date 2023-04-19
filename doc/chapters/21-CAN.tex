@@ -275,6 +275,60 @@ Reply:
 \end{table}
 
 %-------------------------------
+\subsubsection{14h --- Set 32bit Parameter}
+Write 32bit value to module parameter.
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        18h   &  1 Byte & Set 32bit Parameter Command \\ \hline
+        Index & 1 Byte  & Parameter Index, see Module Description \\ \hline
+        Value & 4 Byte & Value to be written\\ \hline
+    \end{tabular}
+\label{tab:CAN-18-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        18h   &  1 Byte & Set 32bit Parameter Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status in case of NACK \\ Otherwise set to 0\\see Error Descriptions}\\ \hline
+    \end{tabular}
+\label{tab:CAN-18-R}
+\end{table}
+\subsubsection{19h --- Get 32bit Parameter}
+Read 32bit value from module parameter.
+
+Command:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        18h   &  1 Byte & Get 32bit Parameter Command \\ \hline
+        Index & 1 Byte  & Parameter Index, see Module Description \\ \hline
+    \end{tabular}
+\label{tab:CAN-19-C}
+\end{table}
+Reply:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Value}   &   \textbf{Length} & \multicolumn{1}{|c|}{\textbf{Description}}\\ \hline \hline
+        19h   &  1 Byte & Get 32bit Parameter Command \\ \hline
+        Status & 1 Byte & \makecell[l]{Error-Status in case of NACK \\ Otherwise set to 0\\see Error Descriptions}\\ \hline
+        Value & 4 Byte & Value to be read; 0 if NACK \\ \hline
+    \end{tabular}
+\label{tab:CAN-19-R}
+\end{table}
+
+%-------------------------------
 \subsubsection{20h --- Get Status Information}
 Get status information from module.
 

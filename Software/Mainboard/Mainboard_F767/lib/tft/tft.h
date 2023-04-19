@@ -99,10 +99,10 @@ uint8_t diode_mode;
 uint16_t diode_values[15];
 
 //Function Generator Variables
+uint8_t wave;
 uint32_t frequency;
 uint16_t amplitude;
 uint16_t offset;
-
 
 //SYMPSU Variables
 uint16_t sympsu_vpos_set;

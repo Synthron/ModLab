@@ -1,6 +1,6 @@
 \babel@toc {nil}{}
-\contentsline {chapter}{\numberline {I}List of Tables}{II}{chapter.2}%
-\contentsline {chapter}{\numberline {II}List of Figures}{III}{chapter.3}%
+\contentsline {chapter}{\numberline {I}List of Tables}{III}{chapter.2}%
+\contentsline {chapter}{\numberline {II}List of Figures}{IV}{chapter.3}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.4}%
 \contentsline {chapter}{\numberline {2}The Rack}{2}{chapter.5}%
 \contentsline {section}{\numberline {2.1}The Idea}{2}{section.6}%
@@ -38,3 +38,54 @@
 \contentsline {section}{\numberline {6.3}Diode Tester}{16}{section.41}%
 \contentsline {subsection}{\numberline {6.3.1}Parameters}{17}{subsection.43}%
 \contentsline {subsection}{\numberline {6.3.2}Operation Modes}{17}{subsection.45}%
+\contentsline {section}{\numberline {6.4}Waveform Generator DDS}{18}{section.47}%
+\contentsline {subsection}{\numberline {6.4.1}Parameters}{18}{subsection.48}%
+\contentsline {subsection}{\numberline {6.4.2}Operation Modes}{18}{subsection.50}%
+\contentsline {section}{\numberline {6.5}Symmetric Linear Power Supply (SymPSU)}{19}{section.52}%
+\contentsline {subsection}{\numberline {6.5.1}Parameters}{19}{subsection.53}%
+\contentsline {section}{\numberline {6.6}Switching Mode Power Supply}{19}{section.55}%
+\contentsline {subsection}{\numberline {6.6.1}Parameters}{20}{subsection.56}%
+\contentsline {chapter}{\numberline {7}Interface Protocols}{21}{chapter.58}%
+\contentsline {section}{\numberline {7.1}USB Monitor}{21}{section.59}%
+\contentsline {section}{\numberline {7.2}CAN}{22}{section.60}%
+\contentsline {subsection}{\numberline {7.2.1}Overview}{22}{subsection.61}%
+\contentsline {subsection}{\numberline {7.2.2}General Structure}{23}{subsection.65}%
+\contentsline {subsection}{\numberline {7.2.3}ID Endcoding}{23}{subsection.66}%
+\contentsline {subsection}{\numberline {7.2.4}Auto-Messages}{23}{subsection.68}%
+\contentsline {subsection}{\numberline {7.2.5}Base-Addresses}{24}{subsection.70}%
+\contentsline {subsection}{\numberline {7.2.6}Commands}{24}{subsection.72}%
+\contentsline {subsubsection}{\numberline {7.2.6.1}01h --- Reset Module}{24}{subsubsection.74}%
+\contentsline {subsubsection}{\numberline {7.2.6.2}05h --- Ping / Discovery}{25}{subsubsection.75}%
+\contentsline {subsubsection}{\numberline {7.2.6.3}10h --- Set 8bit Parameter}{25}{subsubsection.76}%
+\contentsline {subsubsection}{\numberline {7.2.6.4}11h --- Get 8bit Parameter}{26}{subsubsection.77}%
+\contentsline {subsubsection}{\numberline {7.2.6.5}14h --- Set 16bit Parameter}{26}{subsubsection.78}%
+\contentsline {subsubsection}{\numberline {7.2.6.6}15h --- Get 16bit Parameter}{26}{subsubsection.79}%
+\contentsline {subsubsection}{\numberline {7.2.6.7}14h --- Set 32bit Parameter}{27}{subsubsection.80}%
+\contentsline {subsubsection}{\numberline {7.2.6.8}19h --- Get 32bit Parameter}{27}{subsubsection.81}%
+\contentsline {subsubsection}{\numberline {7.2.6.9}20h --- Get Status Information}{28}{subsubsection.82}%
+\contentsline {subsubsection}{\numberline {7.2.6.10}40h --- Enable Output}{28}{subsubsection.83}%
+\contentsline {subsubsection}{\numberline {7.2.6.11}41h --- Disable Output}{28}{subsubsection.84}%
+\contentsline {subsubsection}{\numberline {7.2.6.12}60h --- Set Operation Mode}{29}{subsubsection.85}%
+\contentsline {subsubsection}{\numberline {7.2.6.13}61h --- Get Operation Mode}{29}{subsubsection.86}%
+\contentsline {subsection}{\numberline {7.2.7}Error Descriptions}{30}{subsection.87}%
+\contentsline {subsubsection}{\numberline {7.2.7.1}Status Byte}{30}{subsubsection.88}%
+\contentsline {section}{\numberline {7.3}TFT Display}{31}{section.89}%
+\contentsline {subsection}{\numberline {7.3.1}HBC to TFT}{31}{subsection.90}%
+\contentsline {subsection}{\numberline {7.3.2}Change Device Page}{31}{subsection.91}%
+\contentsline {subsection}{\numberline {7.3.3}Set Input Process Data}{32}{subsection.92}%
+\contentsline {subsection}{\numberline {7.3.4}Set Output}{32}{subsection.96}%
+\contentsline {subsection}{\numberline {7.3.5}General Settings (Home Screen)}{32}{subsection.97}%
+\contentsline {section}{\numberline {7.4}ESP SPI}{34}{section.98}%
+\contentsline {section}{\numberline {7.5}Backplane SPI}{34}{section.99}%
+\contentsline {subsection}{\numberline {7.5.1}5V SPI}{34}{subsection.100}%
+\contentsline {subsection}{\numberline {7.5.2}3V3 SPI}{34}{subsection.101}%
+\contentsline {section}{\numberline {7.6}I2C}{34}{section.102}%
+\contentsline {subsection}{\numberline {7.6.1}Standard Mode}{34}{subsection.103}%
+\contentsline {subsection}{\numberline {7.6.2}Fast Mode}{34}{subsection.104}%
+\contentsline {chapter}{\numberline {A}Mainboard Schematic}{36}{appendix.105}%
+\contentsline {chapter}{\numberline {B}Bustermination Schematic}{41}{appendix.106}%
+\contentsline {chapter}{\numberline {C}Diode Tester Schematic}{43}{appendix.107}%
+\contentsline {chapter}{\numberline {D}Symmetric Power Supply Schematic}{45}{appendix.108}%
+\contentsline {chapter}{\numberline {E}Switching Mode Power Supply Schematic}{52}{appendix.109}%
+\contentsline {chapter}{\numberline {F}Electronic Load Schematic}{57}{appendix.110}%
+\contentsline {chapter}{\numberline {G}Waveform Generator Schematic}{63}{appendix.111}%
