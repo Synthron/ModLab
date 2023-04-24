@@ -1911,7 +1911,7 @@
     (uuid 2b7fbaa7-69eb-431d-9dd7-d955aa1e6dc7)
     (property "Reference" "K101" (id 0) (at 347.98 120.7602 90))
     (property "Value" "ADW11" (id 1) (at 347.98 123.2971 90))
-    (property "Footprint" "Relay_THT:Relay_1P1T_NO_10x24x18.8mm_Panasonic_ADW11xxxxW_THT" (id 2) (at 346.71 100.965 0)
+    (property "Footprint" "eigene:JS 05 MN KT" (id 2) (at 346.71 100.965 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://www.panasonic-electric-works.com/pew/es/downloads/ds_dw_hl_en.pdf" (id 3) (at 347.98 134.62 0)
@@ -2136,10 +2136,10 @@
   )
 
   (symbol (lib_id "Diode:LL4148") (at 347.98 149.86 180) (unit 1)
-    (in_bom yes) (on_board yes) (fields_autoplaced)
+    (in_bom yes) (on_board yes)
     (uuid 8b4ac7f1-7037-48ea-a701-c8c6cf9f002a)
-    (property "Reference" "D101" (id 0) (at 347.98 144.8902 0))
-    (property "Value" "LL4148" (id 1) (at 347.98 147.4271 0))
+    (property "Reference" "D101" (id 0) (at 347.98 147.32 0))
+    (property "Value" "LL4148" (id 1) (at 347.98 152.4 0))
     (property "Footprint" "Diode_SMD:D_MiniMELF" (id 2) (at 347.98 145.415 0)
       (effects (font (size 1.27 1.27)) hide)
     )
@@ -2960,7 +2960,7 @@
       (reference "J302") (unit 1) (value "SWD") (footprint "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical")
     )
     (path "/2b7fbaa7-69eb-431d-9dd7-d955aa1e6dc7"
-      (reference "K101") (unit 1) (value "ADW11") (footprint "Relay_THT:Relay_1P1T_NO_10x24x18.8mm_Panasonic_ADW11xxxxW_THT")
+      (reference "K101") (unit 1) (value "ADW11") (footprint "eigene:JS 05 MN KT")
     )
     (path "/80ecc604-5698-4185-9b84-236647b00752/b7c5248a-3f39-417b-84a0-bcbbfeefd2cf"
       (reference "L201") (unit 1) (value "150µ") (footprint "Inductor_THT:L_Toroid_Vertical_L17.8mm_W8.1mm_P7.62mm_Bourns_5700")
