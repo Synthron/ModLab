@@ -3014,7 +3014,7 @@
       (reference "R208") (unit 1) (value "30 0,5W") (footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal")
     )
     (path "/80ecc604-5698-4185-9b84-236647b00752/d6f1ad38-595c-43fb-ac45-72e4715f03f4"
-      (reference "R209") (unit 1) (value "12k") (footprint "Resistor_SMD:R_0805_2012Metric")
+      (reference "R209") (unit 1) (value "5k6") (footprint "Resistor_SMD:R_0805_2012Metric")
     )
     (path "/80ecc604-5698-4185-9b84-236647b00752/523792af-3d3d-4406-8e9d-1a06cf399874"
       (reference "R210") (unit 1) (value "100") (footprint "Resistor_SMD:R_0805_2012Metric")
@@ -3044,7 +3044,7 @@
       (reference "R218") (unit 1) (value "0R100 3W+") (footprint "Resistor_THT:R_Axial_Power_L20.0mm_W6.4mm_P5.08mm_Vertical")
     )
     (path "/80ecc604-5698-4185-9b84-236647b00752/e5ed0683-c607-4e29-b2c9-4b4f34860655"
-      (reference "R219") (unit 1) (value "12k") (footprint "Resistor_SMD:R_0805_2012Metric")
+      (reference "R219") (unit 1) (value "8k2") (footprint "Resistor_SMD:R_0805_2012Metric")
     )
     (path "/80ecc604-5698-4185-9b84-236647b00752/21e664e8-e315-4727-9a24-1d79bbb149b3"
       (reference "R220") (unit 1) (value "39k") (footprint "Resistor_SMD:R_0805_2012Metric")

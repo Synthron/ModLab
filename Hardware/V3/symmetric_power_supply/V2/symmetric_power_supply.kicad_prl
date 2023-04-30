@@ -33,7 +33,6 @@
       3,
       4,
       5,
-      8,
       9,
       10,
       11,
@@ -61,11 +60,11 @@
       35,
       36
     ],
-    "visible_layers": "ffcffff_ffffffff",
-    "zone_display_mode": 0
+    "visible_layers": "ffcfd77_ffffffff",
+    "zone_display_mode": 1
   },
   "meta": {
-    "filename": "Power_SMPS.kicad_prl",
+    "filename": "symmetric_power_supply.kicad_prl",
     "version": 3
   },
   "project": {

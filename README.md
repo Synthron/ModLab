@@ -36,56 +36,40 @@ But now It will be bigger, better and way too complicated.
 
 - [X] Redesign modules with STM32
   - [x] Master Bus Controller with F767
-    - [X] Review
-    - [X] Ordered
-    - [X] Assembled
-  - [x] Diode/LED-Tester
-    - [X] V1
-      - [X] Review
-      - [X] Ordered
-      - [X] Assembled
-    - [X] V2
-      - [X] Review
-      - [X] Ordered
-      - [X] Assembled
-  - [X] Variable Power Supply
     - [X] V1
       - [X] Review
       - [X] Ordered
       - [X] Assembled
     - [ ] V2
-      - [ ] Fix Relais Footprint
-      - [ ] Feedback Dividers for correct level
+      - [ ] Change LCD connector
+      - [ ] omit external SRAM
+      - [ ] include header for Reset
+  - [x] Diode/LED-Tester
+    - [X] V1
+    - [X] V2
+  - [X] Variable Power Supply
+    - [X] V1
+    - [ ] V2
+      - [X] Fix Relais Footprint
+      - [X] Feedback Dividers for correct level
       - [ ] Review
       - [ ] Ordered
       - [ ] Assembled
   - [x] Symmetric Power Supply
     - [X] V1
-      - [X] Review
-      - [X] Ordered
-      - [X] Assembled
     - [ ] V2
-      - [ ] fix negative channel
-      - [ ] fix CC LEDs
+      - [X] fix negative channel
+      - [X] fix CC LEDs
       - [ ] Review
       - [ ] Ordered
       - [ ] Assembled
   - [x] Waveform generator
-    - [x] Review
-    - [X] Ordered
-    - [X] Assembled
   - [ ] DSO-138 clone?
-  - [ ] Electronic Load
-    - [X] Review
-    - [X] Ordered
-    - [X] Assembled
+  - [X] Electronic Load
   - [ ] Logic Tester
   - [ ] Continuity tester
   - [ ] Speaker Module
   - [x] Termination boards and Bus Extenders
-    - [x] Review
-    - [X] Ordered
-    - [X] Assembled
 
 ---
 
