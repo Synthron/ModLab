@@ -59,7 +59,7 @@
     )
     (pad_to_mask_clearance 0)
     (pcbplotparams
-      (layerselection 0x00010fc_ffffffff)
+      (layerselection 0x00010ec_ffffffff)
       (disableapertmacros false)
       (usegerberextensions true)
       (usegerberattributes false)
@@ -10852,7 +10852,7 @@
     (path "/b9484292-0d56-41c7-9fff-30bb000b5045/361d57f7-bc66-4809-958e-9fe2271dba9b")
     (attr smd)
     (fp_text reference "D306" (at 0 -2 -90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+      (effects (font (size 0.6 0.6) (thickness 0.1)))
       (tstamp 43736d6c-9fe8-451a-9d37-66a7b8722980)
     )
     (fp_text value "5V1" (at 0 2.1 -90) (layer "F.Fab")
