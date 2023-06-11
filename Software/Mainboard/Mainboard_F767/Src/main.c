@@ -39,6 +39,7 @@
 #include "tft.h"
 #include "modlab.h"
 #include <stdio.h>
+#include "usb_mon.h"
 
 
 /* USER CODE END Includes */
@@ -63,6 +64,7 @@
 
 uint16_t counter;
 uint32_t tick_loop;
+uint32_t tick_loop_old;
 
 uint8_t address = 0;
 
@@ -153,7 +155,7 @@ int main(void)
  
 
 
-  tick_loop = HAL_GetTick();
+  tick_loop = HAL_GetTick() + 1000;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -187,6 +189,13 @@ int main(void)
       case PAGE_LOAD:
         load_page_loop();
         break;
+    }
+
+    if(tick_loop < (HAL_GetTick() - 1000))
+    {
+      tick_loop = HAL_GetTick();
+      sprintf(out_buf, "USB Test Zyklus, Tick-Time = %d\n", HAL_GetTick());
+      CDC_Transmit_FS((uint8_t *)out_buf, strlen(out_buf));
     }
     
   }

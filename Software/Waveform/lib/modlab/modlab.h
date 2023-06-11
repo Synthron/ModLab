@@ -110,7 +110,7 @@ extern "C" {
 #define OFFSETOUT   0x30
 #define SQUAREWAVE     0
 #define SINEWAVE       1
-#define TRIANGLEWAVE   2
+#define TRIANGLEWAVE   3
 
 CAN_TxHeaderTypeDef TxHeader;
 uint8_t TxData[8];

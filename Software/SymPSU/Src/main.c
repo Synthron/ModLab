@@ -61,9 +61,9 @@
 #define ADCpv_offset 0
 #define ADCpc_factor 0.52
 #define ADCpc_offset 0
-#define ADCnv_factor 0.52
+#define ADCnv_factor 0.6
 #define ADCnv_offset 0
-#define ADCnc_factor 0.52
+#define ADCnc_factor 0.0308
 #define ADCnc_offset 0
 
 /* USER CODE END PD */
@@ -398,17 +398,16 @@ void Set_Output(uint8_t channel, uint16_t value)
   case V_NEG:
     if (value > VOLTN_MAX)
       value = VOLTN_MAX;
-    multiplicator = (double)((PWM_MAX - VOLTN_ZERO) / (double)VOLTN_MAX) + 1.0;
+    multiplicator = (double)(((PWM_MAX - VOLTN_ZERO) / (double)VOLTN_MAX) / 1.5) + 1.0;
     temp1 = (uint16_t)((double)value * multiplicator) + VOLTN_ZERO;
     TIM2->CCR3 = temp1;
     break;
   case I_NEG:
-    // if(value > AMPN_MAX)
-    //   value = AMPN_MAX;
-    // multiplicator = (double)((AMPN_REF - AMPN_ZERO) / (double)AMPN_MAX) + 1.8;
-    // temp1 = (uint16_t)((double)value * multiplicator) + AMPN_ZERO;
-    // TIM2->CCR4 = temp1;
-    TIM2->CCR4 = value;
+    if(value > AMPN_MAX)
+      value = AMPN_MAX;
+    multiplicator = (double)((AMPN_REF - AMPN_ZERO) / (double)AMPN_MAX) + 1.8;
+    temp1 = (uint16_t)((double)value * multiplicator) + AMPN_ZERO;
+    TIM2->CCR4 = temp1;
     break;
   default:
     break;

@@ -12,6 +12,7 @@
 #include "usart.h"
 #include <stdio.h>
 #include "modlab.h"
+#include "usb_mon.h"
 #include <string.h>
 
 #define PAGE_MAIN   0

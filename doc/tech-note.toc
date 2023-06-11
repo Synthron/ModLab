@@ -1,4 +1,4 @@
-\babel@toc {nil}{}
+\babel@toc {nil}{}\relax 
 \contentsline {chapter}{\numberline {I}List of Tables}{III}{chapter.2}%
 \contentsline {chapter}{\numberline {II}List of Figures}{IV}{chapter.3}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.4}%
@@ -89,3 +89,4 @@
 \contentsline {chapter}{\numberline {E}Switching Mode Power Supply Schematic}{52}{appendix.109}%
 \contentsline {chapter}{\numberline {F}Electronic Load Schematic}{57}{appendix.110}%
 \contentsline {chapter}{\numberline {G}Waveform Generator Schematic}{63}{appendix.111}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

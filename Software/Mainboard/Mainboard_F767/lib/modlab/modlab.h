@@ -15,6 +15,7 @@ extern "C" {
 
 #include "tim.h"
 #include "tft.h"
+#include "usb_mon.h"
 #include "can.h"
 
 //Device Defines
