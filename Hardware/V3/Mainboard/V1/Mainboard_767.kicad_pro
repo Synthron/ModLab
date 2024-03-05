@@ -34,9 +34,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.762,
-          "height": 1.524,
-          "width": 1.524
+          "drill": 2.85,
+          "height": 2.85,
+          "width": 2.85
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -61,14 +61,7 @@
           "width": 0.3
         }
       ],
-      "drc_exclusions": [
-        "items_not_allowed|224536000|139700000|ed393cce-3098-48e7-8b0f-97b7fab6c76c|00000000-0000-0000-0000-000000000000",
-        "items_not_allowed|224536000|50800000|3bad0d50-8e67-4a7e-be88-4eebc7f6ab9c|00000000-0000-0000-0000-000000000000",
-        "items_not_allowed|70746000|139620000|f60576c8-e30f-46b4-b666-4673e686527e|00000000-0000-0000-0000-000000000000",
-        "items_not_allowed|70746000|50620000|4c184224-7652-4c14-a52e-3fadc4961ede|00000000-0000-0000-0000-000000000000",
-        "silk_over_copper|227246000|142510000|984663f3-4206-46bb-a7de-45dda118344c|fba66214-a92e-435c-aa6b-402231778185",
-        "silk_over_copper|227246000|47990000|984663f3-4206-46bb-a7de-45dda118344c|5ec1ab35-0079-41d2-b57d-b609649a1b6b"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -436,7 +429,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "symmetric_power_supply.kicad_pro",
+    "filename": "Mainboard_767.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -523,28 +516,20 @@
   },
   "sheets": [
     [
-      "5e4943ff-1ffb-44ba-9540-14736a143c56",
+      "ef9bc902-4771-4fba-ba4c-e137a2c4161a",
       ""
     ],
     [
-      "ccac4440-4180-4fc1-940b-af78cef92ce1",
-      "Positive Channel"
-    ],
-    [
-      "b9484292-0d56-41c7-9fff-30bb000b5045",
-      "Negative Channel"
-    ],
-    [
-      "8afed617-f835-448f-adb7-505b547ee673",
+      "345b0c78-6789-4c8f-9848-626ba850b0e5",
       "CPU"
     ],
     [
-      "0254a615-9c48-4a54-9cb2-c4b8d1624a25",
+      "a2874a52-0a80-42d0-98dc-011d9cb05359",
       "Power"
     ],
     [
-      "e390bbeb-8f75-459c-b881-befb51965aac",
-      "Filters"
+      "9b7517c0-8f54-43ba-ae5c-f2481e8b19e3",
+      "Peripherals"
     ]
   ],
   "text_variables": {}

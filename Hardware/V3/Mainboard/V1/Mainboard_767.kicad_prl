@@ -35,10 +35,10 @@
       3,
       4,
       5,
+      7,
       8,
       9,
       10,
-      11,
       13,
       14,
       15,
@@ -63,11 +63,11 @@
       35,
       36
     ],
-    "visible_layers": "ffcffff_ffffffff",
-    "zone_display_mode": 0
+    "visible_layers": "ffcbc20_7ffffff9",
+    "zone_display_mode": 1
   },
   "meta": {
-    "filename": "Diode_Tester.kicad_prl",
+    "filename": "Mainboard_767.kicad_prl",
     "version": 3
   },
   "project": {

@@ -34,9 +34,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 2.85,
-          "height": 2.85,
-          "width": 2.85
+          "drill": 0.762,
+          "height": 1.524,
+          "width": 1.524
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -45,8 +45,7 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "45_degree_only": false,
-          "min_clearance": 0.254
+          "min_clearance": 0.25
         }
       },
       "diff_pair_dimensions": [
@@ -61,7 +60,23 @@
           "width": 0.3
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "footprint_type_mismatch|157480000|105918000|bee80b09-9d29-4d2d-b4a8-0a254784b7ea|00000000-0000-0000-0000-000000000000",
+        "footprint_type_mismatch|95504000|69342000|d83df908-4d7a-468b-abbb-c8838c81df94|00000000-0000-0000-0000-000000000000",
+        "items_not_allowed|227711000|142240000|d98e3ac3-51da-454d-b7f7-0a1a533b03f6|00000000-0000-0000-0000-000000000000",
+        "items_not_allowed|227711000|53340000|ba007249-e9dd-42d5-bd4f-d748ad2c82c8|00000000-0000-0000-0000-000000000000",
+        "items_not_allowed|73921000|142160000|e0957722-910a-452e-96a9-af7de03e29bc|00000000-0000-0000-0000-000000000000",
+        "items_not_allowed|73921000|53160000|e0f601cb-b7e9-4048-9b48-38fc8dad9ecd|00000000-0000-0000-0000-000000000000",
+        "items_not_allowed|76421000|54773000|6ba8a651-a6ca-4b35-9171-e163b2fa3719|00000000-0000-0000-0000-000000000000",
+        "solder_mask_bridge|78486000|144399000|7b0d19e6-3407-4437-a0c5-066a6fdd0afd|227d22e7-d140-4f65-8ab2-a4bf60237ea1",
+        "solder_mask_bridge|78486000|144399000|cd744510-b3ca-4762-90bc-8865c7ed1f15|8f7aa9d0-b1a7-4adc-9634-3fb0023dba01",
+        "solder_mask_bridge|81026000|144399000|7b0d19e6-3407-4437-a0c5-066a6fdd0afd|227d22e7-d140-4f65-8ab2-a4bf60237ea1",
+        "solder_mask_bridge|81026000|144399000|cd744510-b3ca-4762-90bc-8865c7ed1f15|8f7aa9d0-b1a7-4adc-9634-3fb0023dba01",
+        "solder_mask_bridge|83566000|144399000|7b0d19e6-3407-4437-a0c5-066a6fdd0afd|227d22e7-d140-4f65-8ab2-a4bf60237ea1",
+        "solder_mask_bridge|83566000|144399000|cd744510-b3ca-4762-90bc-8865c7ed1f15|8f7aa9d0-b1a7-4adc-9634-3fb0023dba01",
+        "solder_mask_bridge|86106000|144399000|7b0d19e6-3407-4437-a0c5-066a6fdd0afd|227d22e7-d140-4f65-8ab2-a4bf60237ea1",
+        "solder_mask_bridge|86106000|144399000|cd744510-b3ca-4762-90bc-8865c7ed1f15|8f7aa9d0-b1a7-4adc-9634-3fb0023dba01"
+      ],
       "meta": {
         "version": 2
       },
@@ -116,8 +131,6 @@
         "zones_intersect": "error"
       },
       "rules": {
-        "allow_blind_buried_vias": false,
-        "allow_microvias": false,
         "max_error": 0.005,
         "min_clearance": 0.09999999999999999,
         "min_connection": 0.0,
@@ -203,8 +216,7 @@
           "drill": 1.0
         }
       ],
-      "zones_allow_external_fillets": false,
-      "zones_use_no_outline": true
+      "zones_allow_external_fillets": false
     },
     "layer_presets": [],
     "viewports": []
@@ -391,18 +403,23 @@
     "rule_severities": {
       "bus_definition_conflict": "error",
       "bus_entry_needed": "error",
-      "bus_label_syntax": "error",
       "bus_to_bus_conflict": "error",
       "bus_to_net_conflict": "error",
+      "conflicting_netclasses": "error",
       "different_unit_footprint": "error",
       "different_unit_net": "error",
       "duplicate_reference": "error",
       "duplicate_sheet_names": "error",
+      "endpoint_off_grid": "warning",
       "extra_units": "error",
       "global_label_dangling": "warning",
       "hier_label_mismatch": "error",
       "label_dangling": "error",
       "lib_symbol_issues": "warning",
+      "missing_bidi_pin": "warning",
+      "missing_input_pin": "warning",
+      "missing_power_pin": "error",
+      "missing_unit": "warning",
       "multiple_net_names": "warning",
       "net_not_bus_member": "warning",
       "no_connect_connected": "warning",
@@ -412,6 +429,7 @@
       "pin_to_pin": "warning",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
+      "simulation_model_issue": "ignore",
       "unannotated": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",
@@ -423,7 +441,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "Mainboard_767.kicad_pro",
+    "filename": "Mainboard.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -467,6 +485,8 @@
   "schematic": {
     "annotate_start_num": 0,
     "drawing": {
+      "dashed_lines_dash_length_ratio": 12.0,
+      "dashed_lines_gap_length_ratio": 3.0,
       "default_line_thickness": 6.0,
       "default_text_size": 50.0,
       "field_names": [],
@@ -486,37 +506,31 @@
       "version": 1
     },
     "net_format_name": "",
-    "ngspice": {
-      "fix_include_paths": true,
-      "fix_passive_vals": false,
-      "meta": {
-        "version": 0
-      },
-      "model_mode": 0,
-      "workbook_filename": ""
-    },
     "page_layout_descr_file": "",
-    "plot_directory": "C:/Users/mamueller/Documents/Sonstiges/ModLab-master/doc/schematics",
-    "spice_adjust_passive_values": false,
+    "plot_directory": "",
+    "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
+    "spice_model_current_sheet_as_root": true,
+    "spice_save_all_currents": false,
+    "spice_save_all_voltages": false,
     "subpart_first_id": 65,
     "subpart_id_separator": 0
   },
   "sheets": [
     [
-      "ef9bc902-4771-4fba-ba4c-e137a2c4161a",
+      "737b48b5-519b-4053-b969-03cfc953172d",
       ""
     ],
     [
-      "345b0c78-6789-4c8f-9848-626ba850b0e5",
-      "CPU"
-    ],
-    [
-      "a2874a52-0a80-42d0-98dc-011d9cb05359",
+      "e8347361-4033-43ec-9733-2c16a804a3da",
       "Power"
     ],
     [
-      "9b7517c0-8f54-43ba-ae5c-f2481e8b19e3",
+      "70409374-e0c4-4c21-9d8c-849616ae9aa8",
+      "CPU"
+    ],
+    [
+      "0562d754-acfc-436e-a9f5-9706cfe2022a",
       "Peripherals"
     ]
   ],
